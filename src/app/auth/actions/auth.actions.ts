@@ -1,11 +1,37 @@
 import { Action } from '@ngrx/store';
+import { Credentials } from '../models/credentials.model';
 
 export enum AuthActionTypes {
-  LoadAuths = '[Auth] Load Auths'
+  Login = '[Auth] Login',
+  LoginFailure = '[Auth] Login failure',
+  LoginSuccess = '[Auth] Login success',
+  LoginRedirect = '[Auth] Login redirect',
 }
 
-export class LoadAuths implements Action {
-  readonly type = AuthActionTypes.LoadAuths;
+export class Login implements Action {
+  readonly type = AuthActionTypes.Login;
+
+  constructor(public payload: { credentials: Credentials }) {}
 }
 
-export type AuthActions = LoadAuths;
+export class LoginSuccess implements Action {
+  readonly type = AuthActionTypes.LoginSuccess;
+
+  constructor(public payload: { user: string }) {}
+}
+
+export class LoginFailure implements Action {
+  readonly type = AuthActionTypes.LoginFailure;
+
+  constructor(public payload: { error: any }) {}
+}
+
+export class LoginRedirect implements Action {
+  readonly type = AuthActionTypes.LoginRedirect;
+}
+
+export type AuthActions =
+  | Login
+  | LoginSuccess
+  | LoginFailure
+  | LoginRedirect;

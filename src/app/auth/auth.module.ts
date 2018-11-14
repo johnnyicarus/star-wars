@@ -1,18 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
-import * as fromAuth from './reducers/auth.reducer';
+import { authReducer } from './reducers/auth.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './effects/auth.effects';
 import { LoginPageComponent } from './containers/login-page/login-page.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
-    StoreModule.forFeature('auth', fromAuth.reducer),
-    EffectsModule.forFeature([AuthEffects])
+    ReactiveFormsModule,
+    StoreModule.forFeature('auth', authReducer),
+    EffectsModule.forFeature([ AuthEffects ])
   ],
-  declarations: [ LoginPageComponent ],
+  declarations: [ LoginPageComponent, LoginFormComponent ],
   exports: [ LoginPageComponent ],
 })
 export class AuthModule { }

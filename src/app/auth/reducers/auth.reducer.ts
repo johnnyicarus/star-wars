@@ -1,21 +1,38 @@
-import { Action } from '@ngrx/store';
 import { AuthActions, AuthActionTypes } from '../actions/auth.actions';
 
-export interface State {
-
+export interface AuthState {
+  user: string;
+  error: string;
+  pending: boolean;
 }
 
-export const initialState: State = {
-
+export const authInitialState: AuthState = {
+  user: '',
+  error: '',
+  pending: false,
 };
 
-export function reducer(state = initialState, action: AuthActions): State {
+export function authReducer(state = authInitialState, action: AuthActions): AuthState {
   switch (action.type) {
-
-    case AuthActionTypes.LoadAuths:
-      return state;
-
-
+    case AuthActionTypes.Login:
+      return {
+        ...state,
+        error: null,
+        pending: true,
+      };
+    case AuthActionTypes.LoginFailure:
+      return {
+        ...state,
+        error: action.payload.error,
+        pending: false,
+      };
+    case AuthActionTypes.LoginSuccess:
+      return {
+        ...state,
+        user: action.payload.user,
+        error: null,
+        pending: false,
+      };
     default:
       return state;
   }
