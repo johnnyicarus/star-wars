@@ -136,5 +136,27 @@
       }
     }
   },
-  "defaultProject": "star-wars"
+  "defaultProject": "star-wars",
+  "schematics": {
+    "@ngrx/schematics:component": {
+      "spec": true,
+      "inlineStyle": true,
+      "inlineTemplate": true,
+      "changeDetection": "OnPush",
+      "prefix": "sw",
+      "styleext": "css"
+    },
+    "@ngrx/schematics:directive": {
+      "prefix": "sw"
+    },
+    "@schematics/angular:component": {
+      "inlineStyle": true,
+      "inlineTemplate": true,
+      "changeDetection": "OnPush"
+    }
+  },
+  "cli": {
+    "packageManager": "yarn",
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
