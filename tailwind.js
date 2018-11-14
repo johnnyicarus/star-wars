@@ -25,7 +25,7 @@ View the full documentation at https://tailwindcss.com.
 */
 const merge = require('lodash.merge');
 
-let defaultConfig = require('tailwindcss/defaultConfig')();
+// let defaultConfig = require('tailwindcss/defaultConfig')();
 
 const rhythmUnit = 0.5;
 const multiply = (i = 1) => `${i * rhythmUnit}rem`;
@@ -51,6 +51,7 @@ const verticalRhythms = {
   '20x': multiply(20),
   '24x': multiply(24),
   '25x': multiply(25),
+  '36x': multiply(36),
 };
 
 
@@ -446,7 +447,7 @@ module.exports = {
   |
   */
 
-  borderColors: global.Object.assign({ default: colors['grey-light'] }, colors),
+  borderColors: merge({ default: colors['grey-light'] }, colors),
 
 
   /*
