@@ -51,7 +51,7 @@ import styleConfig from '../../../../../tailwind.js';
   `,
   styles: [
     `button:disabled {
-      background: ${styleConfig.colors.white};
+      background: #ffffff; /* TODO Use tailwind config */
       cursor: not-allowed;
     }`,
     `.has-error {
