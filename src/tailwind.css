@@ -35,6 +35,30 @@
  * @import "components/buttons";
  * @import "components/forms";
  */
+/**
+ * Responsive typography
+ */
+html {
+  font-size: 1em;
+}
+
+@media (min-width: 768px) {
+
+  html {
+    font-size: 1.125em;
+  }
+}
+
+@media (min-width: 992px) {
+
+  html {
+    font-size: 1.25em;
+  }
+}
+
+body {
+  background: linear-gradient(to left, #C06C84, #6C5B7B, #355C7D);
+}
 
 /**
  * This injects all of Tailwind's utility classes, generated based on your

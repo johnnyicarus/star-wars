@@ -23,8 +23,35 @@ View the full documentation at https://tailwindcss.com.
 | values with some of the Tailwind defaults.
 |
 */
+const merge = require('lodash.merge');
 
-let defaultConfig = require('tailwindcss/defaultConfig')()
+let defaultConfig = require('tailwindcss/defaultConfig')();
+
+const rhythmUnit = 0.5;
+const multiply = (i = 1) => `${i * rhythmUnit}rem`;
+const verticalRhythms = {
+  '1x': multiply(1),
+  '2x': multiply(2),
+  '3x': multiply(3),
+  '4x': multiply(4),
+  '5x': multiply(5),
+  '6x': multiply(6),
+  '7x': multiply(7),
+  '8x': multiply(8),
+  '9x': multiply(9),
+  '10x': multiply(10),
+  '11x': multiply(11),
+  '12x': multiply(12),
+  '13x': multiply(13),
+  '14x': multiply(14),
+  '15x': multiply(15),
+  '16x': multiply(16),
+  '18x': multiply(18),
+  '19x': multiply(19),
+  '20x': multiply(20),
+  '24x': multiply(24),
+  '25x': multiply(25),
+};
 
 
 /*
@@ -301,12 +328,12 @@ module.exports = {
   |
   */
 
-  leading: {
+  leading: merge(verticalRhythms, {
     'none': 1,
     'tight': 1.25,
     'normal': 1.5,
     'loose': 2,
-  },
+  }),
 
 
   /*
@@ -467,7 +494,7 @@ module.exports = {
   |
   */
 
-  width: {
+  width: merge(verticalRhythms, {
     'auto': 'auto',
     'px': '1px',
     '1': '0.25rem',
@@ -497,7 +524,7 @@ module.exports = {
     '5/6': '83.33333%',
     'full': '100%',
     'screen': '100vw',
-  },
+  }),
 
 
   /*
@@ -515,7 +542,7 @@ module.exports = {
   |
   */
 
-  height: {
+  height: merge(verticalRhythms, {
     'auto': 'auto',
     'px': '1px',
     '1': '0.25rem',
@@ -534,7 +561,7 @@ module.exports = {
     '64': '16rem',
     'full': '100%',
     'screen': '100vh',
-  },
+  }),
 
 
   /*
@@ -551,10 +578,10 @@ module.exports = {
   |
   */
 
-  minWidth: {
+  minWidth: merge(verticalRhythms, {
     '0': '0',
     'full': '100%',
-  },
+  }),
 
 
   /*
@@ -571,11 +598,11 @@ module.exports = {
   |
   */
 
-  minHeight: {
+  minHeight: merge(verticalRhythms, {
     '0': '0',
     'full': '100%',
     'screen': '100vh',
-  },
+  }),
 
 
   /*
@@ -593,7 +620,7 @@ module.exports = {
   |
   */
 
-  maxWidth: {
+  maxWidth: merge(verticalRhythms, {
     'xs': '20rem',
     'sm': '30rem',
     'md': '40rem',
@@ -604,7 +631,7 @@ module.exports = {
     '4xl': '90rem',
     '5xl': '100rem',
     'full': '100%',
-  },
+  }),
 
 
   /*
@@ -621,10 +648,10 @@ module.exports = {
   |
   */
 
-  maxHeight: {
+  maxHeight: merge(verticalRhythms, {
     'full': '100%',
     'screen': '100vh',
-  },
+  }),
 
 
   /*
@@ -642,7 +669,7 @@ module.exports = {
   |
   */
 
-  padding: {
+  padding: merge(verticalRhythms, {
     'px': '1px',
     '0': '0',
     '1': '0.25rem',
@@ -658,7 +685,7 @@ module.exports = {
     '20': '5rem',
     '24': '6rem',
     '32': '8rem',
-  },
+  }),
 
 
   /*
@@ -676,7 +703,7 @@ module.exports = {
   |
   */
 
-  margin: {
+  margin: merge(verticalRhythms, {
     'auto': 'auto',
     'px': '1px',
     '0': '0',
@@ -693,7 +720,7 @@ module.exports = {
     '20': '5rem',
     '24': '6rem',
     '32': '8rem',
-  },
+  }),
 
 
   /*
@@ -711,7 +738,7 @@ module.exports = {
   |
   */
 
-  negativeMargin: {
+  negativeMargin: merge(verticalRhythms, {
     'px': '1px',
     '0': '0',
     '1': '0.25rem',
@@ -727,7 +754,7 @@ module.exports = {
     '20': '5rem',
     '24': '6rem',
     '32': '8rem',
-  },
+  }),
 
 
   /*
@@ -952,4 +979,4 @@ module.exports = {
     separator: ':',
   },
 
-}
+};
