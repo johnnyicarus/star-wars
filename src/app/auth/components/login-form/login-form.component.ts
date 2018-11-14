@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Credentials } from '../../models/credentials.model';
 import { FormControl, FormGroup } from '@angular/forms';
-import styleConfig from '../../../../../tailwind.js';
+import styleConfig from '../../../../tailwind.js';
 
 @Component({
   selector: 'sw-login-form',
