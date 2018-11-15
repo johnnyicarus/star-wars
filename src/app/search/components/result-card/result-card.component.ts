@@ -1,20 +1,19 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Entity } from '../../../core/models/entity.model';
 
 @Component({
   selector: 'sw-result-card',
   template: `
     <p>
-      result-card works!
+      {{card.id}} | {{card.title}}
+      {{ card | json }}
     </p>
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ResultCardComponent implements OnInit {
+export class ResultCardComponent {
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  @Input()
+  card: Entity;
 }

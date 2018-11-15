@@ -8,3 +8,4 @@ export type EntityType = 'films' | 'people';
 export type Entity = Film | Person;
 
 export type ResourceState = FilmState | PersonState;
+

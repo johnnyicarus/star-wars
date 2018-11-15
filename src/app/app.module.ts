@@ -11,7 +11,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { CoreModule } from './core/core.module';
 import { AuthModule } from './auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
-import { MatCheckboxModule } from '@angular/material';
+import { FilmEffects } from './core/effects/film.effects';
+import { PersonEffects } from './core/effects/person.effects';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,10 @@ import { MatCheckboxModule } from '@angular/material';
     AuthModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([
+      FilmEffects,
+      PersonEffects,
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
