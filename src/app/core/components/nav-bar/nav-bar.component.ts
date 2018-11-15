@@ -7,9 +7,11 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
       <nav class="relative select-none flex items-stretch">
         <div class="flex flex-no-shrink items-stretch h-6x">
           <a routerLink=""
+             queryParamsHandling="merge" 
              class="text-black flex-no-grow flex-no-shrink relative py-1x px-2x leading-none no-underline flex items-center hover:bg-grey-lightest font-semibold">
             Star Search
           </a>
+          <!-- TODO query params handling doesn't seem necessary -->
         </div>
         <div class="flex items-stretch flex-no-shrink flex-grow">
           <div class="flex items-stretch justify-end ml-auto">
@@ -18,11 +20,13 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
             </p>
             <a *ngIf="!user"
                routerLink=""
+               queryParamsHandling="merge"
                class="text-black flex-no-grow flex-no-shrink relative py-2 px-4 leading-none no-underline flex items-center hover:bg-pink-light">
               Login
             </a>
             <a *ngIf="!!user"
                routerLink=""
+               queryParamsHandling="merge"
                class="text-black flex-no-grow flex-no-shrink relative py-2 px-4 leading-none no-underline flex items-center hover:bg-pink-light">
               Logout
             </a>
