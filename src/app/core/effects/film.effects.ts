@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { AddFilms, FilmActionTypes, InitializeFilm } from '../actions/film.actions';
-import { selectFilmCount, selectFilmTotal } from '../selectors/film.selectors';
+import { AddFilms, FilmActionTypes, InitializeFilms } from '../actions/film.actions';
+import { selectFilmCount, selectFinalFilmTotal } from '../selectors/film.selectors';
 import { filter, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import { calculatePage, notAllEntitiesLoaded } from '../utils/count.utils';
@@ -14,13 +14,14 @@ export class FilmEffects {
 
   @Effect()
   initialize$ = this._actions$.pipe(
-    ofType(FilmActionTypes.InitializeFilm),
-    withLatestFrom(this._store.pipe(select(selectFilmTotal)), this._store.pipe(select(selectFilmCount))),
-    filter(([ action, total, count ]) => notAllEntitiesLoaded(total, count)),
-    mergeMap(([ action, total ]) =>
-      this._apiService.getPage('films', '', calculatePage(total)).pipe(
+    ofType(FilmActionTypes.InitializeFilms),
+    map((action: InitializeFilms): string => action.payload.term),
+    withLatestFrom(this._store.pipe(select(selectFinalFilmTotal)), this._store.pipe(select(selectFilmCount))),
+    filter(([ term, total, count ]) => notAllEntitiesLoaded(total, count)),
+    mergeMap(([ term, total ]) =>
+      this._apiService.getPage('films', term, calculatePage(total)).pipe(
         map(resource => mapToPage(resource, 'films')),
-        map((returner) => new AddFilms({ results: returner.results, term: '', count: returner.count })),
+        map((returner) => new AddFilms({ results: returner.results, term, count: returner.count })),
       )
     ),
   );

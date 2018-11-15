@@ -1,17 +1,25 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { personAdapter, PersonState } from '../reducers/person.reducer';
-import { getCount } from '../utils/count.utils';
+import { getCount, getTotal } from '../utils/count.utils';
+import { selectSearchTerm } from '../../search/selectors/search.selectors';
 
 export const selectPersonState = createFeatureSelector<PersonState>('person');
 
 export const {
   selectIds,
   selectEntities,
-  selectAll: selectAllPeople,
-  selectTotal: selectPersonTotal,
+  selectAll,
+  selectTotal,
 } = personAdapter.getSelectors(selectPersonState);
 
 export const selectPersonCount = createSelector(
   selectPersonState,
+  selectSearchTerm,
   getCount,
+);
+
+export const selectFinalPersonTotal = createSelector(
+  selectPersonState,
+  selectSearchTerm,
+  getTotal,
 );

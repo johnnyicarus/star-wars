@@ -5,8 +5,7 @@ import { Entity } from '../../../core/models/entity.model';
   selector: 'sw-result-card',
   template: `
     <p>
-      {{card.id}} | {{card.title}}
-      {{ card | json }}
+      {{card.id}} | {{card.title}} | {{card.name}}
     </p>
   `,
   styles: [],

@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Person } from '../models/person.model';
 import { PersonActions, PersonActionTypes } from '../actions/person.actions';
-import { setAddManyState } from '../utils/state.utils';
+import { addSearchIfNew, setAddManyState } from '../utils/state.utils';
 
 export interface PersonState extends EntityState<Person> {
   count: number;
@@ -30,6 +30,8 @@ export function personReducer(
       return personAdapter.addOne(action.payload.person, state);
     case PersonActionTypes.AddPeople:
       return personAdapter.addMany(<Person[]>action.payload.results, <PersonState>setAddManyState(<PersonState>state, action.payload));
+    case PersonActionTypes.InitializePeople:
+      return <PersonState>addSearchIfNew(action.payload.term, state);
     default:
       return state;
   }

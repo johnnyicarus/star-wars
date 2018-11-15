@@ -1,5 +1,5 @@
 import { FilmActions, FilmActionTypes } from '../actions/film.actions';
-import { setAddManyState } from '../utils/state.utils';
+import { addSearchIfNew, setAddManyState, setSearches } from '../utils/state.utils';
 import { Film } from '../models/film.model';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { SearchResults } from '../../search/models/search.model';
@@ -27,6 +27,8 @@ export function filmReducer(
       return filmAdapter.addOne(action.payload.film, state);
     case FilmActionTypes.AddFilms:
       return filmAdapter.addMany(<Film[]>action.payload.results, <FilmState>setAddManyState(state, action.payload));
+    case FilmActionTypes.InitializeFilms:
+      return <FilmState>addSearchIfNew(action.payload.term, state);
     default:
       return state;
   }

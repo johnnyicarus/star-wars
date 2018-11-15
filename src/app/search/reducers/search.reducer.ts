@@ -3,6 +3,7 @@ import { Filter } from '../models/filter.model';
 
 export interface SearchState {
   filter: Filter;
+  term: string;
 }
 
 export const searchInitialState: SearchState = {
@@ -14,6 +15,7 @@ export const searchInitialState: SearchState = {
     starships: true,
     vehicles: true,
   },
+  term: '',
 };
 
 export function searchReducer(state = searchInitialState, action: SearchActions): SearchState {
@@ -22,6 +24,11 @@ export function searchReducer(state = searchInitialState, action: SearchActions)
       return {
         ...state,
         filter: action.payload.filter,
+      };
+    case SearchActionTypes.SetSearch:
+      return {
+        ...state,
+        term: action.payload.term,
       };
     default:
       return state;

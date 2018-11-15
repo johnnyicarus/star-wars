@@ -15,10 +15,10 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styles: [
     `:host {
       position: fixed;
-      top: 2.9375rem; /* 1px overlap with nav bar to hide small hole */ 
+      top: 2.9375rem; /* 1px overlap with nav bar to hide small hole */
       left: 0;
       width: 100%;
-    }`
+    }`,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

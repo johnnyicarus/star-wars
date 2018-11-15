@@ -10,6 +10,8 @@ export enum PersonActionTypes {
 
 export class InitializePeople implements Action {
   readonly type = PersonActionTypes.InitializePeople;
+
+  constructor(public payload: { term: string }) {}
 }
 
 export class AddPeople implements Action {

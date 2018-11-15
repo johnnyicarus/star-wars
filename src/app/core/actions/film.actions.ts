@@ -3,13 +3,15 @@ import { Film } from '../models/film.model';
 import { Search } from '../../search/models/search.model';
 
 export enum FilmActionTypes {
-  InitializeFilm = '[Film] Initialize film',
+  InitializeFilms = '[Film] Initialize film',
   AddFilm = '[Film] Add film',
   AddFilms = '[Film] Add films',
 }
 
-export class InitializeFilm implements Action {
-  readonly type = FilmActionTypes.InitializeFilm;
+export class InitializeFilms implements Action {
+  readonly type = FilmActionTypes.InitializeFilms;
+
+  constructor(public payload: { term: string }) {}
 }
 
 export class AddFilm implements Action {
@@ -25,6 +27,6 @@ export class AddFilms implements Action {
 }
 
 export type FilmActions =
-  | InitializeFilm
+  | InitializeFilms
   | AddFilm
   | AddFilms;
