@@ -14,16 +14,16 @@ export class InitializePeople implements Action {
   constructor(public payload: { term: string, loadMore: boolean }) {}
 }
 
-export class AddPeople implements Action {
-  readonly type = PersonActionTypes.AddPeople;
-
-  constructor(public payload: Search) {}
-}
-
 export class AddPerson implements Action {
   readonly type = PersonActionTypes.AddPerson;
 
   constructor(public payload: { person: Person }) {}
+}
+
+export class AddPeople implements Action {
+  readonly type = PersonActionTypes.AddPeople;
+
+  constructor(public payload: Search) {}
 }
 
 export type PersonActions =
