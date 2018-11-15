@@ -29,7 +29,7 @@ export class ApiService {
       completeUrl = `${completeUrl}&`;
     }
     if (page) {
-      completeUrl += `${completeUrl}page=${page}`;
+      completeUrl = `${completeUrl}page=${page}`;
     }
     return this.httpGet(completeUrl);
   }

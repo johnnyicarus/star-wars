@@ -15,13 +15,13 @@ export class FilmEffects {
   @Effect()
   initialize$ = this._actions$.pipe(
     ofType(FilmActionTypes.InitializeFilms),
-    map((action: InitializeFilms): string => action.payload.term),
+    map((action: InitializeFilms) => action.payload),
     withLatestFrom(this._store.pipe(select(selectFinalFilmTotal)), this._store.pipe(select(selectFilmCount))),
-    filter(([ term, total, count ]) => notAllEntitiesLoaded(total, count)),
-    mergeMap(([ term, total ]) =>
-      this._apiService.getPage('films', term, calculatePage(total)).pipe(
+    filter(([ payload, total, count ]) => notAllEntitiesLoaded(total, count)),
+    mergeMap(([ payload, total ]) =>
+      this._apiService.getPage('films', payload.term, calculatePage(total, payload.loadMore)).pipe(
         map(resource => mapToPage(resource, 'films')),
-        map((returner) => new AddFilms({ results: returner.results, term, count: returner.count })),
+        map((returner) => new AddFilms({ results: returner.results, term: payload.term, count: returner.count })),
       )
     ),
   );

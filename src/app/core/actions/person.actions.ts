@@ -11,7 +11,7 @@ export enum PersonActionTypes {
 export class InitializePeople implements Action {
   readonly type = PersonActionTypes.InitializePeople;
 
-  constructor(public payload: { term: string }) {}
+  constructor(public payload: { term: string, loadMore: boolean }) {}
 }
 
 export class AddPeople implements Action {

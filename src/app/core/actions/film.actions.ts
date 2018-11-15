@@ -11,7 +11,7 @@ export enum FilmActionTypes {
 export class InitializeFilms implements Action {
   readonly type = FilmActionTypes.InitializeFilms;
 
-  constructor(public payload: { term: string }) {}
+  constructor(public payload: { term: string, loadMore: boolean }) {}
 }
 
 export class AddFilm implements Action {

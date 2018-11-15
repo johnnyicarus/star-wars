@@ -15,13 +15,13 @@ export class PersonEffects {
   @Effect()
   initialize$ = this._actions$.pipe(
     ofType(PersonActionTypes.InitializePeople),
-    map((action: InitializePeople): string => action.payload.term),
+    map((action: InitializePeople) => action.payload),
     withLatestFrom(this._store.pipe(select(selectFinalPersonTotal)), this._store.pipe(select(selectPersonCount))),
-    filter(([ term, total, count ]) => notAllEntitiesLoaded(total, count)),
-    mergeMap(([ term, total ]) =>
-      this._apiService.getPage('people', term, calculatePage(total)).pipe(
+    filter(([ payload, total, count ]) => notAllEntitiesLoaded(total, count)),
+    mergeMap(([ payload, total ]) =>
+      this._apiService.getPage('people', payload.term, calculatePage(total, payload.loadMore)).pipe(
         map(resource => mapToPage(resource, 'people')),
-        map((returner) => new AddPeople({ results: returner.results, term, count: returner.count })),
+        map((returner) => new AddPeople({ results: returner.results, term: payload.term, count: returner.count })),
       )
     ),
   );

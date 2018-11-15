@@ -16,14 +16,15 @@ export class SearchEffects {
   @Effect()
   check$ = this._actions$.pipe(
     ofType<CheckResults>(SearchActionTypes.CheckResults),
+    map((action: CheckResults): boolean => action.payload.loadMore),
     withLatestFrom(this._store.pipe(select(selectSearchFilter)), this._store.pipe(select(selectSearchTerm))),
-    exhaustMap(([ action, filter, term ]): Observable<Action> => from(initActions(filter, term)))
+    exhaustMap(([ loadMore, filter, term ]): Observable<Action> => from(initActions(filter, term, loadMore)))
   );
 
   @Effect()
   search$ = this._actions$.pipe(
-    ofType(SearchActionTypes.SetSearch),
-    map(() => new CheckResults()),
+    ofType(SearchActionTypes.SetSearch, SearchActionTypes.LoadMore),
+    map((action) => new CheckResults({ loadMore: action.type === SearchActionTypes.LoadMore })),
   );
 
   constructor(
@@ -32,10 +33,10 @@ export class SearchEffects {
   ) {}
 }
 
-const initActions = (filter: Filter, term: string): Action[] => {
+const initActions = (filter: Filter, term: string, loadMore: boolean): Action[] => {
 
   return [].concat(
-    filter.films ? [ new InitializeFilms({ term }) ] : [],
-    filter.people ? [ new InitializePeople({ term }) ] : [],
+    filter.films ? [ new InitializeFilms({ term, loadMore }) ] : [],
+    filter.people ? [ new InitializePeople({ term, loadMore }) ] : [],
   );
 };

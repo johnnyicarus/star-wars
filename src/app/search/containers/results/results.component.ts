@@ -26,6 +26,6 @@ export class ResultsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this._store.dispatch(new CheckResults());
+    this._store.dispatch(new CheckResults({ loadMore: false }));
   }
 }

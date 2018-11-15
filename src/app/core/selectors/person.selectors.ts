@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { personAdapter, PersonState } from '../reducers/person.reducer';
-import { getCount, getTotal } from '../utils/count.utils';
+import { getCount, getTotal, isLargerThan } from '../utils/count.utils';
 import { selectSearchTerm } from '../../search/selectors/search.selectors';
 
 export const selectPersonState = createFeatureSelector<PersonState>('person');
@@ -22,4 +22,10 @@ export const selectFinalPersonTotal = createSelector(
   selectPersonState,
   selectSearchTerm,
   getTotal,
+);
+
+export const showPersonLoadMore = createSelector(
+  selectPersonCount,
+  selectFinalPersonTotal,
+  isLargerThan,
 );

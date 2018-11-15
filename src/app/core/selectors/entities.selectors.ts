@@ -3,8 +3,8 @@ import { Entity, ResourceState } from '../models/entity.model';
 import { createSelector } from '@ngrx/store';
 import { shuffleArray, sortArray } from '../utils/sort.utils';
 import { selectSearchFilter, selectSearchTerm } from '../../search/selectors/search.selectors';
-import { selectFilmState } from './film.selectors';
-import { selectPersonState } from './person.selectors';
+import { selectFilmState, showFilmLoadMore } from './film.selectors';
+import { selectPersonState, showPersonLoadMore } from './person.selectors';
 import intersectionWith from 'lodash.intersectionwith';
 import { FilmState } from '../reducers/film.reducer';
 import { PersonState } from '../reducers/person.reducer';
@@ -45,4 +45,20 @@ export const selectEntitiesForDisplay = createSelector(
   selectSearchTerm,
   selectSearchFilter,
   getEntities,
+);
+
+/**
+ * 1) Uses the rest operator to "concat" all booleans from individual entity load more selectors.
+ * 2) Checks if the respective entities are set in the filter
+ * 3) Returns true unless all entities of the filtered types are loaded
+ *
+ * Note: This function assumes that the order of entity selectors is identical to the order in the filter object
+ */
+const hasLoadMore = (filter, ...args) => !args.filter((value, key) => Object.values(filter)[key]).every(value => !value);
+
+export const selectShowLoadMore = createSelector(
+  selectSearchFilter,
+  showFilmLoadMore,
+  showPersonLoadMore,
+  hasLoadMore,
 );

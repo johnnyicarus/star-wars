@@ -5,6 +5,7 @@ export enum SearchActionTypes {
   SetFilter = '[Search] Set filter',
   SetSearch = '[Search] Set search',
   CheckResults = '[Search] Check results',
+  LoadMore = '[Search] Load more',
 }
 
 export class SetFilter implements Action {
@@ -21,9 +22,16 @@ export class SetSearch implements Action {
 
 export class CheckResults implements Action {
   readonly type = SearchActionTypes.CheckResults;
+
+  constructor (public payload: { loadMore: boolean }) {}
+}
+
+export class LoadMore implements Action {
+  readonly type = SearchActionTypes.LoadMore;
 }
 
 export type SearchActions =
   | SetFilter
   | SetSearch
-  | CheckResults;
+  | CheckResults
+  | LoadMore;
