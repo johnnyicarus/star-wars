@@ -1,11 +1,11 @@
 /**
  * A Star Wars film
  */
-import { EntityType } from './entity.model';
+import { Entity, EntityType } from './entity.model';
 
 export interface Film {
   id: string;
-  type: EntityType;
+  readonly type: EntityType;
   /**
    * The url of this resource
    */

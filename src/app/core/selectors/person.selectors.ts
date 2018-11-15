@@ -7,7 +7,7 @@ export const selectPersonState = createFeatureSelector<PersonState>('person');
 
 export const {
   selectIds,
-  selectEntities,
+  selectEntities: selectPersonEntities,
   selectAll,
   selectTotal,
 } = personAdapter.getSelectors(selectPersonState);

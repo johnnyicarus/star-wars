@@ -4,7 +4,7 @@ import { Entity } from '../../../core/models/entity.model';
 @Component({
   selector: 'sw-result-card',
   template: `
-    <a [routerLink]="['detail', card.type, card.id]"
+    <a [routerLink]="['/detail', card.type, card.id]"
        class="no-underline">
       <sw-film-card *ngIf="card.type === 'films'"
                     [film]="card"></sw-film-card>

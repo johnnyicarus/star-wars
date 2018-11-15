@@ -36,7 +36,13 @@
  * @import "components/buttons";
  * @import "components/forms";
  */
+.c-detail {
+  @apply mt-8x mx-2x  bg-white rounded shadow-md;
+}
 
+.c-detail__container {
+  @apply p-2x border-b border-solid border-grey-light;
+}
 
 /**
  * This injects all of Tailwind's utility classes, generated based on your
@@ -85,6 +91,7 @@ html {
 
 body {
   font-size: 1rem;
+  line-height: 1.5;
   background: linear-gradient(to left, #C06C84, #6C5B7B, #355C7D);
 }
 

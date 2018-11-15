@@ -1,21 +1,23 @@
-import { Action } from '@ngrx/store';
 import { DetailActions, DetailActionTypes } from '../actions/detail.actions';
+import { Detail } from '../models/detail.model';
 
-export interface State {
-
+export interface DetailState {
+  currentDetail: Detail;
 }
 
-export const initialState: State = {
-
+export const detailInitialState: DetailState = {
+  currentDetail: {
+    id: '',
+    type: 'films',
+  },
 };
 
-export function reducer(state = initialState, action: DetailActions): State {
+export function detailReducer(state = detailInitialState, action: DetailActions): DetailState {
   switch (action.type) {
-
-    case DetailActionTypes.LoadDetails:
-      return state;
-
-
+    case DetailActionTypes.LoadDetail:
+      return {
+        currentDetail: action.payload.detail,
+      };
     default:
       return state;
   }

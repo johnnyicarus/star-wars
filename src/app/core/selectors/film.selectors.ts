@@ -7,7 +7,7 @@ export const selectFilmState = createFeatureSelector<FilmState>('film');
 
 export const {
   selectIds,
-  selectEntities,
+  selectEntities: selectFilmEntities,
   selectAll,
   selectTotal,
 } = filmAdapter.getSelectors(selectFilmState);

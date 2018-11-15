@@ -5,7 +5,7 @@ import { EntityType } from './entity.model';
 
 export interface Person {
   id: string;
-  type: EntityType;
+  readonly type: EntityType;
   /**
    * An array of urls of film resources that this person has been in.
    */

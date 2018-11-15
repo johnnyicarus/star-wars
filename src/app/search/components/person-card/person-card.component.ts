@@ -11,7 +11,7 @@ import { Person } from '../../../core/models/person.model';
         <div>
           <h2 class="text-black text-base leading-3x font-semibold"> {{ person.name }} </h2>
           <div class="text-grey-dark leading-3x">
-            Born: {{ person.birth_year }} / Size: {{ person.height | swHeight }} / Weight: {{ person.mass }}kg
+            Born: {{ person.birth_year }} / Height: {{ person.height | swHeight }} / Weight: {{ person.mass }}kg
             Skin: {{ person.skin_color }} / Hair: {{ person.hair_color }} / Eyes: {{ person.eye_color }} / Gender: {{ person.gender }} 
           </div>
           <div class="leading-3x text-grey-darkest"> Last edited: {{ person.edited | date:'longDate' }}</div>

@@ -554,6 +554,22 @@ table {
  * @import "components/forms";
  */
 
+.c-detail {
+  margin-top: 4rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  background-color: #fff;
+  border-radius: .25rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .12), 0 2px 4px 0 rgba(0, 0, 0, .08);
+}
+
+.c-detail__container {
+  padding: 1rem;
+  border-bottom-width: 1px;
+  border-style: solid;
+  border-color: #dae1e7;
+}
+
 /**
  * This injects all of Tailwind's utility classes, generated based on your
  * config file.
@@ -11766,7 +11782,7 @@ table {
 }
 
 .text-4xl {
-  font-size: 2.25rem;
+  font-size: 2rem;
 }
 
 .text-5xl {
@@ -12332,6 +12348,7 @@ html {
 
 body {
   font-size: 1rem;
+  line-height: 1.5;
   background: linear-gradient(to left, #c06c84, #6c5b7b, #355c7d);
 }
 
@@ -23533,7 +23550,7 @@ body {
   }
 
   .sm\:text-4xl {
-    font-size: 2.25rem;
+    font-size: 2rem;
   }
 
   .sm\:text-5xl {
@@ -35243,7 +35260,7 @@ body {
   }
 
   .md\:text-4xl {
-    font-size: 2.25rem;
+    font-size: 2rem;
   }
 
   .md\:text-5xl {
@@ -46953,7 +46970,7 @@ body {
   }
 
   .lg\:text-4xl {
-    font-size: 2.25rem;
+    font-size: 2rem;
   }
 
   .lg\:text-5xl {
@@ -58663,7 +58680,7 @@ body {
   }
 
   .xl\:text-4xl {
-    font-size: 2.25rem;
+    font-size: 2rem;
   }
 
   .xl\:text-5xl {
