@@ -1,21 +1,28 @@
-import { Action } from '@ngrx/store';
 import { SearchActions, SearchActionTypes } from '../actions/search.actions';
+import { Filter } from '../models/filter.model';
 
-export interface State {
-
+export interface SearchState {
+  filter: Filter;
 }
 
-export const initialState: State = {
-
+export const searchInitialState: SearchState = {
+  filter: {
+    films: true,
+    people: true,
+    planets: true,
+    species: true,
+    starships: true,
+    vehicles: true,
+  },
 };
 
-export function reducer(state = initialState, action: SearchActions): State {
+export function searchReducer(state = searchInitialState, action: SearchActions): SearchState {
   switch (action.type) {
-
-    case SearchActionTypes.LoadSearchs:
-      return state;
-
-
+    case SearchActionTypes.SetFilter:
+      return {
+        ...state,
+        filter: action.payload.filter,
+      };
     default:
       return state;
   }

@@ -1,11 +1,21 @@
 import { Action } from '@ngrx/store';
+import { Filter } from '../models/filter.model';
 
 export enum SearchActionTypes {
-  LoadSearchs = '[Search] Load Searchs'
+  SetFilter = '[Search] Set filter',
+  CheckResults = '[Search] Check results',
 }
 
-export class LoadSearchs implements Action {
-  readonly type = SearchActionTypes.LoadSearchs;
+export class SetFilter implements Action {
+  readonly type = SearchActionTypes.SetFilter;
+
+  constructor(public payload: { filter: Filter } ) {}
 }
 
-export type SearchActions = LoadSearchs;
+export class CheckResults implements Action {
+  readonly type = SearchActionTypes.CheckResults;
+}
+
+export type SearchActions =
+  | SetFilter
+  | CheckResults;

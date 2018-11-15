@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 @Component({
   selector: 'sw-nav-bar',
   template: `
-    <header class="w-full bg-white shadow-md fixed pin-t pin-l">
+    <header class="w-full bg-white shadow-md fixed pin-t pin-l h-6x">
       <nav class="relative select-none flex items-stretch">
         <div class="flex flex-no-shrink items-stretch h-6x">
           <a routerLink=""
