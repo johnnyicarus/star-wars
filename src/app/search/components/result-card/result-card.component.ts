@@ -1,15 +1,16 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'sw-search-page',
+  selector: 'sw-result-card',
   template: `
-    <sw-search-bar></sw-search-bar>
-    <sw-results></sw-results>
+    <p>
+      result-card works!
+    </p>
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchPageComponent implements OnInit {
+export class ResultCardComponent implements OnInit {
 
   constructor() { }
 

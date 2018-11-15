@@ -1,15 +1,16 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'sw-search-page',
+  selector: 'sw-load-more',
   template: `
-    <sw-search-bar></sw-search-bar>
-    <sw-results></sw-results>
+    <p>
+      load-more works!
+    </p>
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchPageComponent implements OnInit {
+export class LoadMoreComponent implements OnInit {
 
   constructor() { }
 
