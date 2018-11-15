@@ -32,6 +32,6 @@ import { PersonEffects } from './core/effects/person.effects';
     ])
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
