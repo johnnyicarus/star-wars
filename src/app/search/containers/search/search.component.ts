@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { select, Store } from '@ngrx/store';
-import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
 import { SetSearch } from '../../actions/search.actions';
 import { selectSearchTerm } from '../../selectors/search.selectors';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -48,6 +48,11 @@ export class SearchComponent implements OnInit {
   }
 
   search(term: string) {
-    this._router.navigate([ 'search' ], { queryParams: { search: encodeURIComponent(term) }, queryParamsHandling: 'merge' });
+    if (!term) {
+      this._router.navigate([ 'search' ], { queryParams: { search: null }, queryParamsHandling: 'merge' });
+      this._store.dispatch(new SetSearch({ term: '' }));
+    } else {
+      this._router.navigate([ 'search' ], { queryParams: { search: encodeURIComponent(term) }, queryParamsHandling: 'merge' });
+    }
   }
 }
