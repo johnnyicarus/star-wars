@@ -18,6 +18,9 @@ import { ResultCardComponent } from './components/result-card/result-card.compon
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { MatCheckboxModule } from '@angular/material';
 import { LoadMoreComponent } from './containers/load-more/load-more.component';
+import { FilmCardComponent } from './components/film-card/film-card.component';
+import { PersonCardComponent } from './components/person-card/person-card.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -32,10 +35,12 @@ import { LoadMoreComponent } from './containers/load-more/load-more.component';
     SearchBoxComponent,
     SearchBarComponent,
     ResultCardComponent,
-    CheckboxComponent
+    CheckboxComponent,
+    FilmCardComponent,
+    PersonCardComponent
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     SearchRoutingModule,
     MatCheckboxModule,
     StoreModule.forFeature('search', searchReducer),
