@@ -17,7 +17,7 @@ export class InitializePeople implements Action {
 export class AddPerson implements Action {
   readonly type = PersonActionTypes.AddPerson;
 
-  constructor(public payload: { person: Person }) {}
+  constructor(public payload: { entity: Person }) {}
 }
 
 export class AddPeople implements Action {

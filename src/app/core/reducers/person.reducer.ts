@@ -27,7 +27,7 @@ export function personReducer(
 ): PersonState {
   switch (action.type) {
     case PersonActionTypes.AddPerson:
-      return personAdapter.addOne(action.payload.person, state);
+      return personAdapter.addOne(action.payload.entity, state);
     case PersonActionTypes.AddPeople:
       return personAdapter.addMany(<Person[]>action.payload.results, <PersonState>setAddManyState(<PersonState>state, action.payload));
     case PersonActionTypes.InitializePeople:

@@ -8,6 +8,14 @@ import { selectPersonState, showPersonLoadMore } from './person.selectors';
 import intersectionWith from 'lodash.intersectionwith';
 import { FilmState } from '../reducers/film.reducer';
 import { PersonState } from '../reducers/person.reducer';
+import { selectPlanetState, showPlanetLoadMore } from './planet.selectors';
+import { selectStarshipState, showStarshipLoadMore } from './starship.selectors';
+import { selectVehicleState, showVehicleLoadMore } from './vehicle.selectors';
+import { selectSpecieState, showSpecieLoadMore } from './specie.selectors';
+import { PlanetState } from '../reducers/planet.reducer';
+import { SpecieState } from '../reducers/specie.reducer';
+import { StarshipState } from '../reducers/starship.reducer';
+import { VehicleState } from '../reducers/vehicle.reducer';
 
 const compareWithResults = (state: ResourceState, term: string): Entity[] => {
   let entities: Entity[] = Object.values(state.entities);
@@ -20,12 +28,28 @@ const compareWithResults = (state: ResourceState, term: string): Entity[] => {
   return entities;
 };
 
-const getEntities = (filmState: FilmState, personState: PersonState, filter: Filter, term: string): Entity[] => {
+const getEntities = (
+  filmState: FilmState,
+  personState: PersonState,
+  planetState: PlanetState,
+  specieState: SpecieState,
+  starshipState: StarshipState,
+  vehicleState: VehicleState,
+  filter: Filter, term: string
+): Entity[] => {
   const films = compareWithResults(filmState, term);
-  const peoples = compareWithResults(personState, term);
+  const people = compareWithResults(personState, term);
+  const planets = compareWithResults(planetState, term);
+  const species = compareWithResults(specieState, term);
+  const starships = compareWithResults(starshipState, term);
+  const vehicles = compareWithResults(vehicleState, term);
   const entities = [].concat(
     filter.films ? films : [],
-    filter.people ? peoples : [],
+    filter.people ? people : [],
+    filter.planets ? planets : [],
+    filter.species ? species : [],
+    filter.starships ? starships : [],
+    filter.vehicles ? vehicles : [],
   );
   /*
    * Shuffle entities for some additional fun
@@ -41,9 +65,12 @@ const getEntities = (filmState: FilmState, personState: PersonState, filter: Fil
 export const selectEntitiesForDisplay = createSelector(
   selectFilmState,
   selectPersonState,
+  selectPlanetState,
+  selectSpecieState,
+  selectStarshipState,
+  selectVehicleState,
   selectSearchFilter,
   selectSearchTerm,
-  selectSearchFilter,
   getEntities,
 );
 
@@ -60,5 +87,9 @@ export const selectShowLoadMore = createSelector(
   selectSearchFilter,
   showFilmLoadMore,
   showPersonLoadMore,
+  showPlanetLoadMore,
+  showSpecieLoadMore,
+  showStarshipLoadMore,
+  showVehicleLoadMore,
   hasLoadMore,
 );

@@ -22,7 +22,7 @@ import { Person } from '../../../core/models/person.model';
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PersonCardComponent {
+export class CardPersonComponent {
 
   @Input()
   person: Person;

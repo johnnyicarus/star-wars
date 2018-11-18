@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Film } from '../../../core/models/film.model';
 
 @Component({
-  selector: 'sw-film-card',
+  selector: 'sw-card-film',
   template: `
     <li class="flex flex-row py-2x my-1x px-2x mx-2x bg-white rounded shadow-md">
       <div class="flex flex-col md:flex-row">
@@ -21,7 +21,7 @@ import { Film } from '../../../core/models/film.model';
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FilmCardComponent {
+export class CardFilmComponent {
 
   @Input()
   film: Film;

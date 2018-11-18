@@ -17,9 +17,13 @@ import { ResultCardComponent } from './components/result-card/result-card.compon
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { MatCheckboxModule } from '@angular/material';
 import { LoadMoreComponent } from './containers/load-more/load-more.component';
-import { FilmCardComponent } from './components/film-card/film-card.component';
-import { PersonCardComponent } from './components/person-card/person-card.component';
 import { SharedModule } from '../shared/shared.module';
+import { CardPlanetComponent } from './components/card-planet/card-planet.component';
+import { CardSpecieComponent } from './components/card-specie/card-specie.component';
+import { CardStarshipComponent } from './components/card-starship/card-starship.component';
+import { CardVehicleComponent } from './components/card-vehicle/card-vehicle.component';
+import { CardFilmComponent } from './components/card-film/card-film.component';
+import { CardPersonComponent } from './components/card-person/card-person.component';
 
 @NgModule({
   declarations: [
@@ -35,8 +39,12 @@ import { SharedModule } from '../shared/shared.module';
     SearchBarComponent,
     ResultCardComponent,
     CheckboxComponent,
-    FilmCardComponent,
-    PersonCardComponent
+    CardFilmComponent,
+    CardPersonComponent,
+    CardPlanetComponent,
+    CardSpecieComponent,
+    CardStarshipComponent,
+    CardVehicleComponent,
   ],
   imports: [
     SharedModule,

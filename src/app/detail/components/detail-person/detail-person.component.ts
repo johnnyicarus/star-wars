@@ -1,11 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Person } from '../../../core/models/person.model';
 import { select, Store } from '@ngrx/store';
-import { DetailLookup } from '../../actions/detail.actions';
 import { DetailState } from '../../reducers/detail.reducer';
 import { selectDetailFilms } from '../../selectors/detail.selectors';
 import { config } from '../../../app.config';
-import { EntityType } from '../../../core/models/entity.model';
 import { referenceLookUp } from '../../utils/look-up.utils';
 
 @Component({

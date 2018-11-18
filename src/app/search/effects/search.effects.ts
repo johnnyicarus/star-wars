@@ -9,6 +9,10 @@ import { Filter } from '../models/filter.model';
 import { SearchState } from '../reducers/search.reducer';
 import { InitializeFilms } from '../../core/actions/film.actions';
 import { InitializePeople } from '../../core/actions/person.actions';
+import { InitializePlanets } from '../../core/actions/planet.actions';
+import { InitializeSpecies } from '../../core/actions/specie.actions';
+import { InitializeStarships } from '../../core/actions/starship.actions';
+import { InitializeVehicles } from '../../core/actions/vehicle.actions';
 
 @Injectable()
 export class SearchEffects {
@@ -38,5 +42,9 @@ const initActions = (filter: Filter, term: string, loadMore: boolean): Action[] 
   return [].concat(
     filter.films ? [ new InitializeFilms({ term, loadMore }) ] : [],
     filter.people ? [ new InitializePeople({ term, loadMore }) ] : [],
+    filter.planets ? [ new InitializePlanets({ term, loadMore }) ] : [],
+    filter.species ? [ new InitializeSpecies({ term, loadMore }) ] : [],
+    filter.starships ? [ new InitializeStarships({ term, loadMore }) ] : [],
+    filter.vehicles ? [ new InitializeVehicles({ term, loadMore }) ] : [],
   );
 };

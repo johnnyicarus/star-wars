@@ -16,6 +16,14 @@ import { LoadDetail } from '../../actions/detail.actions';
                     [film]="detail$ | async"></sw-detail-film>
     <sw-detail-person *ngIf="(detail$ | async).type === 'people'"
                       [person]="detail$ | async"></sw-detail-person>
+    <sw-detail-planet *ngIf="(detail$ | async).type === 'planets'"
+                      [planet]="detail$ | async"></sw-detail-planet>
+    <sw-detail-specie *ngIf="(detail$ | async).type === 'species'"
+                      [specie]="detail$ | async"></sw-detail-specie>
+    <sw-detail-starship *ngIf="(detail$ | async).type === 'starships'"
+                       [starship]="detail$ | async"></sw-detail-starship>
+    <sw-detail-vehicle *ngIf="(detail$ | async).type === 'vehicles'"
+                       [vehicle]="detail$ | async"></sw-detail-vehicle>
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush

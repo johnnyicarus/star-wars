@@ -17,7 +17,7 @@ export class InitializeFilms implements Action {
 export class AddFilm implements Action {
   readonly type = FilmActionTypes.AddFilm;
 
-  constructor(public payload: { film: Film }) {}
+  constructor(public payload: { entity: Film }) {}
 }
 
 export class AddFilms implements Action {

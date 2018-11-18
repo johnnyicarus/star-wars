@@ -52,8 +52,8 @@ const mapToAction = (entity: Entity) => {
   // TODO why doesn't the discriminated union not work
   switch (entity.type) {
     case 'films':
-      return new AddFilm({ film: <Film>entity });
+      return new AddFilm({ entity: <Film>entity });
     case 'people':
-      return new AddPerson({ person: <Person>entity });
+      return new AddPerson({ entity: <Person>entity });
   }
 }

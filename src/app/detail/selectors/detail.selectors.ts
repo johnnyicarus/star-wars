@@ -7,8 +7,16 @@ import { Entity } from '../../core/models/entity.model';
 import { Person } from '../../core/models/person.model';
 import { selectFilmEntities } from '../../core/selectors/film.selectors';
 import { selectPersonEntities } from '../../core/selectors/person.selectors';
+import { selectPlanetEntities } from '../../core/selectors/planet.selectors';
+import { selectSpecieEntities } from '../../core/selectors/specie.selectors';
+import { selectStarshipEntities } from '../../core/selectors/starship.selectors';
+import { selectVehicleEntities } from '../../core/selectors/vehicle.selectors';
 import { config } from '../../app.config';
 import get from 'lodash.get';
+import { Planet } from '../../core/models/planet.model';
+import { Specie } from '../../core/models/specie.model';
+import { Starship } from '../../core/models/starship.model';
+import { Vehicle } from '../../core/models/vehicle.model';
 
 const selectDetailState = createFeatureSelector<DetailState>('detail');
 
@@ -19,14 +27,29 @@ const selectCurrentDetail = createSelector(
   getCurrentDetail,
 );
 
-const getAllEntities = (film: Dictionary<Film>, people: Dictionary<Person>): Dictionary<Dictionary<Entity>> => ({
-  films: film,
+const getAllEntities = (
+  films: Dictionary<Film>,
+  people: Dictionary<Person>,
+  planets: Dictionary<Planet>,
+  species: Dictionary<Specie>,
+  starships: Dictionary<Starship>,
+  vehicles: Dictionary<Vehicle>,
+): Dictionary<Dictionary<Entity>> => ({
+  films: films,
   people: people,
+  planets: planets,
+  species: species,
+  starships: starships,
+  vehicles: vehicles,
 });
 
 export const selectAllEntities = createSelector(
   selectFilmEntities,
   selectPersonEntities,
+  selectPlanetEntities,
+  selectSpecieEntities,
+  selectStarshipEntities,
+  selectVehicleEntities,
   getAllEntities,
 );
 
