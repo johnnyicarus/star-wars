@@ -21,13 +21,13 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
             <a *ngIf="!user"
                routerLink=""
                queryParamsHandling="merge"
-               class="text-black flex-no-grow flex-no-shrink relative py-2 px-4 leading-none no-underline flex items-center hover:bg-pink-light">
+               class="text-black flex-no-grow flex-no-shrink relative py-2 px-4 leading-none no-underline flex items-center hover:bg-material-pink">
               Login
             </a>
             <a *ngIf="!!user"
                routerLink=""
                queryParamsHandling="merge"
-               class="text-black flex-no-grow flex-no-shrink relative py-2 px-4 leading-none no-underline flex items-center hover:bg-pink-light">
+               class="text-black flex-no-grow flex-no-shrink relative py-2 px-4 leading-none no-underline flex items-center hover:bg-material-pink">
               Logout
             </a>
           </div>

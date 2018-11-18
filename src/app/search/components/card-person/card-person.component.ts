@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Person } from '../../../core/models/person.model';
 
 @Component({
-  selector: 'sw-person-card',
+  selector: 'sw-card-person',
   template: `
     <li class="flex flex-row py-2x my-1x px-2x mx-2x bg-white rounded shadow-md">
       <div class="flex flex-col md:flex-row">

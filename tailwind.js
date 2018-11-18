@@ -72,6 +72,10 @@ const verticalRhythms = {
 */
 
 let colors = {
+  'material-pink': '#ff4081',
+  'material-pink-light': '#ff80ab',
+  'material-pink-dark': '#f50057',
+
   'transparent': 'transparent',
 
   'black': '#22292f',
