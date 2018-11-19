@@ -5,14 +5,19 @@ import { select, Store } from '@ngrx/store';
 import { selectDetailFilms, selectDetailPeople } from '../../selectors/detail.selectors';
 import { DetailState } from '../../reducers/detail.reducer';
 import { config } from '../../../app.config';
+import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
 
 @Component({
   selector: 'sw-detail-starship',
   template: `
-    <section class="c-detail">
+    <section class="c-detail"
+             [@fadeEnterLeave]>
       <div class="c-detail__container flex">
         <img class="block w-9x h-9x overflow-hidden rounded bg-center bg-cover items-center flex-none mr-2x mb-2x md:mb-0"
-             src="assets/starship.jpg">
+             [defaultImage]="defaultImage"
+             [lazyLoad]="images"
+             [useSrcset]="true"
+             [offset]="offset">
         <h1 class="text-4xl leading-4x pt-5x">{{ starship.name }}</h1>
       </div>
       <div class="c-detail__container">
@@ -23,7 +28,8 @@ import { config } from '../../../app.config';
       <div class="c-detail__container">
         <span>Films</span>
         <ul class="list-reset flex">
-          <li *ngFor="let url of (films$ | async); let i=index">
+          <li *ngFor="let url of (films$ | async); let i=index"
+              [@fadeEnterLeave]>
             <a [routerLink]="['/', 'detail', 'films', getId(starship.films, i)]"
                class="text-grey-dark hover:text-black no-underline pr-1x">{{url}}</a>
           </li>
@@ -44,7 +50,8 @@ import { config } from '../../../app.config';
       <div class="c-detail__container">
         <span>Pilots</span>
         <ul class="list-reset flex">
-          <li *ngFor="let name of (pilots$ | async); let i=index">
+          <li *ngFor="let name of (pilots$ | async); let i=index"
+              [@fadeEnterLeave]>
             <a [routerLink]="['/', 'detail', 'films', getId(starship.pilots, i)]"
                class="text-grey-dark hover:text-black no-underline pr-1x">{{ name }}</a>
           </li>
@@ -57,9 +64,16 @@ import { config } from '../../../app.config';
     </section>
   `,
   styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    fadeEnterLeave,
+  ],
 })
 export class DetailStarshipComponent {
+  offset = 100;
+  defaultImage = 'assets/starship-5x.jpg';
+  images = `assets/starship-90x.jpg 90w,
+            assets/starship-180x.jpg 180w`;
 
   private _starship: Starship;
 

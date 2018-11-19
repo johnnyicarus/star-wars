@@ -5,21 +5,27 @@ import { DetailState } from '../../reducers/detail.reducer';
 import { referenceLookUp } from '../../utils/look-up.utils';
 import { selectDetailFilms, selectDetailPeople, selectDetailPlanet } from '../../selectors/detail.selectors';
 import { config } from '../../../app.config';
+import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
 
 @Component({
   selector: 'sw-detail-specie',
   template: `
-    <section class="c-detail">
+    <section class="c-detail"
+             [@fadeEnterLeave]>
       <div class="c-detail__container flex">
         <img class="block w-9x h-9x overflow-hidden rounded bg-center bg-cover items-center flex-none mr-2x mb-2x md:mb-0"
-             src="assets/species2.jpg">
+             [defaultImage]="defaultImage"
+             [lazyLoad]="images"
+             [useSrcset]="true"
+             [offset]="offset">
         <h1 class="text-4xl leading-4x pt-5x">{{ specie.name }}</h1>
       </div>
       <div class="c-detail__container">
         <div class="flex">
           <p>Homeworld:</p>
           <ul class="list-reset flex">
-            <li *ngFor="let name of (homeworld$ | async); let i=index">
+            <li *ngFor="let name of (homeworld$ | async); let i=index"
+                [@fadeEnterLeave]>
               <a [routerLink]="['/', 'detail', 'planets', getId(specie.homeworld, i)]"
                  class="text-grey-dark hover:text-black no-underline pl-1x">{{ name }}</a>
             </li>
@@ -31,7 +37,8 @@ import { config } from '../../../app.config';
       <div class="c-detail__container">
         <span>Members</span>
         <ul class="list-reset flex">
-          <li *ngFor="let name of (members$ | async); let i=index">
+          <li *ngFor="let name of (members$ | async); let i=index"
+              [@fadeEnterLeave]>
             <a [routerLink]="['/', 'detail', 'films', getId(specie.people, i)]"
                class="text-grey-dark hover:text-black no-underline pr-1x">{{name}}</a>
           </li>
@@ -40,7 +47,8 @@ import { config } from '../../../app.config';
       <div class="c-detail__container">
         <span>Films</span>
         <ul class="list-reset flex">
-          <li *ngFor="let title of (films$ | async); let i=index">
+          <li *ngFor="let title of (films$ | async); let i=index"
+              [@fadeEnterLeave]>
             <a [routerLink]="['/', 'detail', 'films', getId(specie.films, i)]"
                class="text-grey-dark hover:text-black no-underline pr-1x">{{title}}</a>
           </li>
@@ -60,9 +68,16 @@ import { config } from '../../../app.config';
     </section>
   `,
   styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    fadeEnterLeave,
+  ],
 })
 export class DetailSpecieComponent {
+  offset = 100;
+  defaultImage = 'assets/species2-5x.jpg';
+  images = `assets/species2-90x.jpg 90w,
+            assets/species2-180x.jpg 180w`;
 
   private _specie: Specie;
 

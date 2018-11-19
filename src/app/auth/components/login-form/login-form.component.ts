@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Credentials } from '../../models/credentials.model';
 import { FormControl, FormGroup } from '@angular/forms';
-import styleConfig from '../../../../../tailwind.js';
 
 @Component({
   selector: 'sw-login-form',
@@ -34,7 +33,7 @@ import styleConfig from '../../../../../tailwind.js';
           </div>
           <div>
             <p *ngIf="error"
-               class="h-8x p-3x leading-none bg-red border-b border-solid border-red-dark border-t">
+               class="h-8x p-3x leading-none text-white bg-red border-b border-solid border-red-dark border-t">
               {{ error }}
             </p>
           </div>
@@ -52,7 +51,7 @@ import styleConfig from '../../../../../tailwind.js';
   styles: [
     `button:disabled {
       background: #ffffff; /* TODO Use tailwind config */
-      color: black;
+      color: #22292f;
       cursor: not-allowed;
     }`,
     `.has-error {

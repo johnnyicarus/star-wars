@@ -5,7 +5,7 @@ import { MatCheckboxChange } from '@angular/material';
 @Component({
   selector: 'sw-checkbox',
   template: `
-    <li class="py-2x px-1x lg:py-0 lg:pr-0 lg:pl-2x flex-no-grow flex-no-shrink">
+    <li class="py-2x pr-2x lg:py-0 lg:pr-0 lg:pl-2x flex-no-grow flex-no-shrink">
       <mat-checkbox [checked]="checked"
                     (change)="emitChange($event)"
                     (name)="label"

@@ -28,7 +28,7 @@ export class SearchEffects {
   @Effect()
   search$ = this._actions$.pipe(
     ofType(SearchActionTypes.SetSearch, SearchActionTypes.LoadMore),
-    map((action) => new CheckResults({ loadMore: action.type === SearchActionTypes.LoadMore })),
+    map((action: Action): Action => new CheckResults({ loadMore: action.type === SearchActionTypes.LoadMore })),
   );
 
   constructor(

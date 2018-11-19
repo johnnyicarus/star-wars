@@ -12,15 +12,20 @@ import { DetailState } from '../../reducers/detail.reducer';
 import { config } from '../../../app.config';
 import { referenceLookUp } from '../../utils/look-up.utils';
 import { Observable } from 'rxjs';
+import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
 
 @Component({
   selector: 'sw-detail-film',
   template: `
-    <section class="c-detail">
-      <div class="c-detail__container flex">
+    <section class="c-detail"
+             [@fadeEnterLeave]>
+      <div class="c-detail__container md:flex">
         <img class="block w-9x h-9x overflow-hidden rounded bg-center bg-cover items-center flex-none mr-2x mb-2x md:mb-0"
-             src="assets/film1.jpg">
-        <h1 class="text-4xl leading-4x pt-5x">Episode {{ film.episode_id }}: {{ film.title }}</h1>
+             [defaultImage]="defaultImage"
+             [lazyLoad]="images"
+             [useSrcset]="true"
+             [offset]="offset">
+        <h1 class="text-4xl leading-4x md:pt-5x">Episode {{ film.episode_id }}: {{ film.title }}</h1>
       </div>
       <div class="c-detail__container">
         <p>{{ film.opening_crawl }}</p>
@@ -33,44 +38,49 @@ import { Observable } from 'rxjs';
       <div class="c-detail__container">
         <span>Characters</span>
         <ul class="list-reset flex flex-wrap">
-          <li *ngFor="let name of (characters$ | async); let i=index">
+          <li *ngFor="let name of (characters$ | async); let i=index"
+              [@fadeEnterLeave]>
             <a [routerLink]="['/', 'detail', 'people', getId(film.characters, i)]"
                class="text-grey-dark hover:text-black no-underline pr-1x">{{ name }}</a>
           </li>
         </ul>
       </div>
-      <div class="c-detail__container flex">
-        <p>Planets:</p>
-        <ul class="list-reset flex">
-          <li *ngFor="let name of (planets$ | async); let i=index">
+      <div class="c-detail__container">
+        <p>Planets</p>
+        <ul class="list-reset flex flex-wrap">
+          <li *ngFor="let name of (planets$ | async); let i=index"
+              [@fadeEnterLeave]>
             <a [routerLink]="['/', 'detail', 'people', getId(film.planets, i)]"
                class="text-grey-dark hover:text-black no-underline pr-1x">{{ name }}</a>
           </li>
         </ul>
       </div>
-      <div class="c-detail__container flex">
-        <p>Species:</p>
-        <ul class="list-reset flex">
-          <li *ngFor="let name of (species$ | async); let i=index">
-            <a [routerLink]="['/', 'detail', 'people', getId(film.species, i)]"
-               class="text-grey-dark hover:text-black no-underline pl-1x">{{ name }}</a>
+      <div class="c-detail__container">
+        <p>Species</p>
+        <ul class="list-reset flex flex-wrap">
+          <li *ngFor="let name of (species$ | async); let i=index"
+              [@fadeEnterLeave]>
+            <a [routerLink]="['/', 'detail', 'species', getId(film.species, i)]"
+               class="text-grey-dark hover:text-black no-underline pr-1x">{{ name }}</a>
           </li>
         </ul>
       </div>
       <div class="c-detail__container">
-        <span>Spaceships</span>
-        <ul class="list-reset flex">
-          <li *ngFor="let name of (starships$ | async); let i=index">
-            <a [routerLink]="['/', 'detail', 'people', getId(film.starships, i)]"
+        <p>Spaceships</p>
+        <ul class="list-reset flex flex-wrap">
+          <li *ngFor="let name of (starships$ | async); let i=index"
+              [@fadeEnterLeave]>
+            <a [routerLink]="['/', 'detail', 'starships', getId(film.starships, i)]"
                class="text-grey-dark hover:text-black no-underline pr-1x">{{ name }}</a>
           </li>
         </ul>
       </div>
       <div class="c-detail__container">
         <span>Vehicles</span>
-        <ul class="list-reset flex">
-          <li *ngFor="let name of (vehicles$ | async); let i=index">
-            <a [routerLink]="['/', 'detail', 'people', getId(film.vehicles, i)]"
+        <ul class="list-reset flex flex-wrap">
+          <li *ngFor="let name of (vehicles$ | async); let i=index"
+              [@fadeEnterLeave]>
+            <a [routerLink]="['/', 'detail', 'vehicles', getId(film.vehicles, i)]"
                class="text-grey-dark hover:text-black no-underline pr-1x">{{ name }}</a>
           </li>
         </ul>
@@ -82,9 +92,16 @@ import { Observable } from 'rxjs';
     </section>
   `,
   styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    fadeEnterLeave,
+  ],
 })
 export class DetailFilmComponent {
+  offset = 100;
+  defaultImage = 'assets/film1-5x.jpg';
+  images = `assets/film1-90x.jpg 90w,
+            assets/film1-180x.jpg 180w`;
 
   private _film: Film;
 

@@ -37,7 +37,7 @@
  * @import "components/forms";
  */
 .c-detail {
-  @apply mt-8x mx-2x  bg-white rounded shadow-md;
+  @apply mt-8x mx-2x bg-white rounded shadow-md max-w-lg mx-auto;
 }
 
 .c-detail__container {

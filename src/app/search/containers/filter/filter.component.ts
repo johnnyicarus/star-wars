@@ -66,7 +66,7 @@ export class FilterComponent implements OnDestroy {
         [filterChange.name]: filterChange.value,
       })),
       map((newFilter: Filter) => Object.keys(newFilter).filter((value: string): boolean => newFilter[value])),
-    ).subscribe((x: string[]) => this._router.navigate(['search'], { queryParams: { filter: x }, queryParamsHandling: 'merge' }));
+    ).subscribe((values: string[]) => this._router.navigate(['search'], { queryParams: { filter: values }, queryParamsHandling: 'merge' }));
   }
 
   updateFilter(event: FilterChange) {

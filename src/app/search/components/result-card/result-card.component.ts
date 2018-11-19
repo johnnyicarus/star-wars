@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Entity } from '../../../core/models/entity.model';
+import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
 
 @Component({
   selector: 'sw-result-card',
   template: `
     <a [routerLink]="['/detail', card.type, card.id]"
-       class="no-underline">
+       [@fadeEnterLeave]
+       class="block no-underline my-1x py-2x px-2x mx-2x bg-white rounded shadow-md hover:bg-grey-light transition max-w-2xl mx-auto">
       <sw-card-film *ngIf="card.type === 'films'"
                     [film]="card"></sw-card-film>
       <sw-card-person *ngIf="card.type === 'people'"
@@ -21,7 +23,10 @@ import { Entity } from '../../../core/models/entity.model';
     </a>
   `,
   styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    fadeEnterLeave,
+  ],
 })
 export class ResultCardComponent {
 

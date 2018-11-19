@@ -5,14 +5,19 @@ import { DetailState } from '../../reducers/detail.reducer';
 import { selectDetailFilms } from '../../selectors/detail.selectors';
 import { config } from '../../../app.config';
 import { referenceLookUp } from '../../utils/look-up.utils';
+import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
 
 @Component({
   selector: 'sw-detail-person',
   template: `
-    <section class="c-detail">
+    <section class="c-detail"
+             [@fadeEnterLeave]>
       <div class="c-detail__container flex">
         <img class="block w-9x h-9x overflow-hidden rounded bg-center bg-cover items-center flex-none mr-2x mb-2x md:mb-0"
-             src="assets/person.jpg">
+             [defaultImage]="defaultImage"
+             [lazyLoad]="images"
+             [useSrcset]="true"
+             [offset]="offset">
         <h1 class="text-4xl leading-4x pt-5x">{{ person.name }}</h1>
       </div>
       <div class="c-detail__container">
@@ -20,7 +25,8 @@ import { referenceLookUp } from '../../utils/look-up.utils';
         <div class="flex">
           <p>Homeworld:</p>
           <ul class="list-reset flex">
-            <li *ngFor="let world of (films$ | async); let i=index">
+            <li *ngFor="let world of (films$ | async); let i=index"
+                [@fadeEnterLeave]>
               <a [routerLink]="['/', 'detail', 'films', getId(person.films, i)]"
                  class="text-grey-dark hover:text-black no-underline pl-1x">{{ world }}</a>
             </li>
@@ -30,7 +36,8 @@ import { referenceLookUp } from '../../utils/look-up.utils';
       <div class="c-detail__container">
         <span>Films</span>
         <ul class="list-reset flex">
-          <li *ngFor="let url of (films$ | async); let i=index">
+          <li *ngFor="let url of (films$ | async); let i=index"
+              [@fadeEnterLeave]>
             <a [routerLink]="['/', 'detail', 'films', getId(person.films, i)]"
                class="text-grey-dark hover:text-black no-underline pr-1x">{{url}}</a>
           </li>
@@ -40,7 +47,8 @@ import { referenceLookUp } from '../../utils/look-up.utils';
         <div class="flex">
           <p>Species:</p>
           <ul class="list-reset flex">
-            <li *ngFor="let world of (films$ | async); let i=index">
+            <li *ngFor="let world of (films$ | async); let i=index"
+                [@fadeEnterLeave]>
               <a [routerLink]="['/', 'detail', 'films', getId(person.films, i)]"
                  class="text-grey-dark hover:text-black no-underline pl-1x">{{ world }}</a>
             </li>
@@ -56,14 +64,16 @@ import { referenceLookUp } from '../../utils/look-up.utils';
       <div class="c-detail__container">
         <span>Spaceships</span>
         <ul class="list-reset flex">
-          <li *ngFor="let url of (films$ | async); let i=index">
+          <li *ngFor="let url of (films$ | async); let i=index"
+              [@fadeEnterLeave]>
             <a [routerLink]="['/', 'detail', 'films', getId(person.films, i)]"
                class="text-grey-dark hover:text-black no-underline pr-1x">{{url}}</a>
           </li>
         </ul>
         <span>Vehicles</span>
         <ul class="list-reset flex">
-          <li *ngFor="let url of (films$ | async); let i=index">
+          <li *ngFor="let url of (films$ | async); let i=index"
+              [@fadeEnterLeave]>
             <a [routerLink]="['/', 'detail', 'films', getId(person.films, i)]"
                class="text-grey-dark hover:text-black no-underline pr-1x">{{url}}</a>
           </li>
@@ -76,9 +86,16 @@ import { referenceLookUp } from '../../utils/look-up.utils';
     </section>
   `,
   styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    fadeEnterLeave,
+  ],
 })
 export class DetailPersonComponent {
+  offset = 100;
+  defaultImage = 'assets/person-5x.jpg';
+  images = `assets/person-90x.jpg 90w,
+            assets/person-180x.jpg 180w`;
 
   private _person: Person;
 
