@@ -33,10 +33,8 @@ export class DetailEffects {
     withLatestFrom(this._store.pipe(select(selectAllEntities))),
     mergeMap(([ payload, dictionary ]) => {
       const { type, id } = payload;
-      console.log(dictionary);
 
       if (!dictionary[type][id]) {
-        console.log('NOT IN STORE');
 
         return this._api.getEntity(type, id).pipe(
           map((request: GetResult): Entity => mapToEntity(request, type)),

@@ -68,7 +68,8 @@ import { Observable } from 'rxjs';
         <p>Height: <span class="font-semibold">{{ person.height | swHeight }}</span></p>
         <p>Mass: <span class="font-semibold">{{ person.mass }}kg</span></p>
       </div>
-      <div class="c-detail__container">
+      <div *ngIf="(starships$ | async)?.length > 0"
+           class="c-detail__container">
         <span>Spaceships</span>
         <ul class="list-reset flex flex-wrap">
           <li *ngFor="let name of (starships$ | async); let i=index"
@@ -78,7 +79,7 @@ import { Observable } from 'rxjs';
           </li>
         </ul>
       </div>
-      <div class="c-detail__container">
+      <div *ngIf="(vehicles$ | async)?.length > 0" class="c-detail__container">
         <span>Vehicles</span>
         <ul class="list-reset flex flex-wrap">
           <li *ngFor="let name of (vehicles$ | async); let i=index"

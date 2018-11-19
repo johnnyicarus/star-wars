@@ -18,8 +18,8 @@ export class PlanetEffects {
     map((action: InitializePlanets) => action.payload),
     withLatestFrom(this._store.pipe(select(selectFinalPlanetTotal)), this._store.pipe(select(selectPlanetCount))),
     filter(([ payload, total, count ]) => notAllEntitiesLoaded(total, count)),
-    mergeMap(([ payload, total ]) =>
-      this._apiService.getPage('planets', payload.term, calculatePage(total, payload.loadMore)).pipe(
+    mergeMap(([ payload, total, count ]) =>
+      this._apiService.getPage('planets', payload.term, calculatePage(total, payload.loadMore, count)).pipe(
         map(resource => mapToPage(resource, 'planets')),
         map((returner) => new AddPlanets({ results: returner.results, term: payload.term, count: returner.count })),
       )

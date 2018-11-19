@@ -18,8 +18,8 @@ export class StarshipEffects {
     map((action: InitializeStarships) => action.payload),
     withLatestFrom(this._store.pipe(select(selectFinalStarshipTotal)), this._store.pipe(select(selectStarshipCount))),
     filter(([ payload, total, count ]) => notAllEntitiesLoaded(total, count)),
-    mergeMap(([ payload, total ]) =>
-      this._apiService.getPage('starships', payload.term, calculatePage(total, payload.loadMore)).pipe(
+    mergeMap(([ payload, total, count ]) =>
+      this._apiService.getPage('starships', payload.term, calculatePage(total, payload.loadMore, count)).pipe(
         map(resource => mapToPage(resource, 'starships')),
         map((returner) => new AddStarships({ results: returner.results, term: payload.term, count: returner.count })),
       )

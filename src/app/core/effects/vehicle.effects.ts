@@ -18,8 +18,8 @@ export class VehicleEffects {
     map((action: InitializeVehicles) => action.payload),
     withLatestFrom(this._store.pipe(select(selectFinalVehicleTotal)), this._store.pipe(select(selectVehicleCount))),
     filter(([ payload, total, count ]) => notAllEntitiesLoaded(total, count)),
-    mergeMap(([ payload, total ]) =>
-      this._apiService.getPage('vehicles', payload.term, calculatePage(total, payload.loadMore)).pipe(
+    mergeMap(([ payload, total, count ]) =>
+      this._apiService.getPage('vehicles', payload.term, calculatePage(total, payload.loadMore, count)).pipe(
         map(resource => mapToPage(resource, 'vehicles')),
         map((returner) => new AddVehicles({ results: returner.results, term: payload.term, count: returner.count })),
       )

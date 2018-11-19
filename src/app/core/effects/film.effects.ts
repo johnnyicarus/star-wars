@@ -18,8 +18,8 @@ export class FilmEffects {
     map((action: InitializeFilms) => action.payload),
     withLatestFrom(this._store.pipe(select(selectFinalFilmTotal)), this._store.pipe(select(selectFilmCount))),
     filter(([ payload, total, count ]) => notAllEntitiesLoaded(total, count)),
-    mergeMap(([ payload, total ]) =>
-      this._apiService.getPage('films', payload.term, calculatePage(total, payload.loadMore)).pipe(
+    mergeMap(([ payload, total, count ]) =>
+      this._apiService.getPage('films', payload.term, calculatePage(total, payload.loadMore, count)).pipe(
         map(resource => mapToPage(resource, 'films')),
         map((returner) => new AddFilms({ results: returner.results, term: payload.term, count: returner.count })),
       )

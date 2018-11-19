@@ -18,8 +18,8 @@ export class PersonEffects {
     map((action: InitializePeople) => action.payload),
     withLatestFrom(this._store.pipe(select(selectFinalPersonTotal)), this._store.pipe(select(selectPersonCount))),
     filter(([ payload, total, count ]) => notAllEntitiesLoaded(total, count)),
-    mergeMap(([ payload, total ]) =>
-      this._apiService.getPage('people', payload.term, calculatePage(total, payload.loadMore)).pipe(
+    mergeMap(([ payload, total, count ]) =>
+      this._apiService.getPage('people', payload.term, calculatePage(total, payload.loadMore, count)).pipe(
         map(resource => mapToPage(resource, 'people')),
         map((returner) => new AddPeople({ results: returner.results, term: payload.term, count: returner.count })),
       )
