@@ -17,6 +17,9 @@ import { PlanetEffects } from './core/effects/planet.effects';
 import { StarshipEffects } from './core/effects/starship.effects';
 import { SpecieEffects } from './core/effects/specie.effects';
 import { VehicleEffects } from './core/effects/vehicle.effects';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { CustomSerializer } from './utils/serializer.utils';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,7 @@ import { VehicleEffects } from './core/effects/vehicle.effects';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
     CoreModule,
@@ -38,6 +42,10 @@ import { VehicleEffects } from './core/effects/vehicle.effects';
       SpecieEffects,
       VehicleEffects
     ]),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router',
+      serializer: CustomSerializer,
+    }),
   ],
   providers: [],
   bootstrap: [ AppComponent ]
