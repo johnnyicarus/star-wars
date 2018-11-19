@@ -1,13 +1,13 @@
-import { reducer, initialState } from './starship.reducer';
+import { starshipInitialState, starshipReducer } from './starship.reducer';
 
 describe('Spaceship Reducer', () => {
   describe('unknown action', () => {
     it('should return the initial state', () => {
       const action = {} as any;
 
-      const result = reducer(initialState, action);
+      const result = starshipReducer(starshipInitialState, action);
 
-      expect(result).toBe(initialState);
+      expect(result).toBe(starshipInitialState);
     });
   });
 });

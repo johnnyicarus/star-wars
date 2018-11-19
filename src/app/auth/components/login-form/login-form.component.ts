@@ -17,7 +17,8 @@ import { FormControl, FormGroup } from '@angular/forms';
                    placeholder="Username"
                    name="username"
                    id="username"
-                   class="appearance-none border-b border-solid border-grey-light w-full h-8x p-3x leading-none focus:bg-grey-lightest focus:outline-none">
+                   class="appearance-none border-b border-solid border-grey-light w-full h-8x p-3x leading-none
+focus:bg-grey-lightest focus:outline-none">
             <label for="username" class="hidden">Username</label>
           </div>
           <div>
@@ -28,7 +29,8 @@ import { FormControl, FormGroup } from '@angular/forms';
                    name="password"
                    id="password"
                    [class.has-error]="error"
-                   class="appearance-none border-b border-solid border-grey-light w-full h-8x p-3x leading-none focus:bg-grey-lightest focus:outline-none">
+                   class="appearance-none border-b border-solid border-grey-light w-full h-8x p-3x leading-none
+focus:bg-grey-lightest focus:outline-none">
             <label for="password" class="hidden">Password</label>
           </div>
           <div>

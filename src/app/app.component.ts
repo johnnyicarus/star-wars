@@ -23,7 +23,7 @@ import { selectErrorBoolean } from './core/selectors/error.selectors';
   `,
   styles: []
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
   error$: Observable<boolean> = this._store.pipe(select(selectErrorBoolean));
 
@@ -32,8 +32,4 @@ export class AppComponent implements OnInit {
   constructor(
     private _store: Store<AuthState>,
   ) {}
-
-  ngOnInit() {
-
-  }
 }

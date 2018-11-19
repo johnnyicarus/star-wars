@@ -1,22 +1,18 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DetailSpecieComponent } from './detail-specie.component';
+import { containerTestBed } from '../../../utils/tests.utils';
 
 describe('DetailSpecieComponent', () => {
   let component: DetailSpecieComponent;
   let fixture: ComponentFixture<DetailSpecieComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ DetailSpecieComponent ]
-    })
-    .compileComponents();
-  }));
-
   beforeEach(() => {
+    containerTestBed(DetailSpecieComponent);
+
     fixture = TestBed.createComponent(DetailSpecieComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    // fixture.detectChanges();
   });
 
   it('should create', () => {

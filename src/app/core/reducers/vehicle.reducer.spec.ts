@@ -1,13 +1,13 @@
-import { reducer, initialState } from './vehicle.reducer';
+import { vehicleInitialState, vehicleReducer } from './vehicle.reducer';
 
 describe('Vehicle Reducer', () => {
   describe('unknown action', () => {
     it('should return the initial state', () => {
       const action = {} as any;
 
-      const result = reducer(initialState, action);
+      const result = vehicleReducer(vehicleInitialState, action);
 
-      expect(result).toBe(initialState);
+      expect(result).toBe(vehicleInitialState);
     });
   });
 });

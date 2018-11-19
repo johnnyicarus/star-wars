@@ -1,13 +1,13 @@
-import { reducer, initialState } from './detail.reducer';
+import { detailInitialState, detailReducer } from './detail.reducer';
 
 describe('Detail Reducer', () => {
   describe('unknown action', () => {
     it('should return the initial state', () => {
       const action = {} as any;
 
-      const result = reducer(initialState, action);
+      const result = detailReducer(detailInitialState, action);
 
-      expect(result).toBe(initialState);
+      expect(result).toBe(detailInitialState);
     });
   });
 });

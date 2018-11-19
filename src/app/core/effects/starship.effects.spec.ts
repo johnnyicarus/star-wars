@@ -1,20 +1,15 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { provideMockActions } from '@ngrx/effects/testing';
+import { TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 
 import { StarshipEffects } from './starship.effects';
+import { effectsTestBed } from '../../utils/tests.utils';
 
 describe('SpaceshipEffects', () => {
   let actions$: Observable<any>;
   let effects: StarshipEffects;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [
-        StarshipEffects,
-        provideMockActions(() => actions$)
-      ]
-    });
+    effectsTestBed(StarshipEffects, actions$);
 
     effects = TestBed.get(StarshipEffects);
   });

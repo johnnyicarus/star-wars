@@ -1,20 +1,15 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { provideMockActions } from '@ngrx/effects/testing';
+import { TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 
 import { DetailEffects } from './detail.effects';
+import { effectsTestBed } from '../../utils/tests.utils';
 
 describe('DetailEffects', () => {
   let actions$: Observable<any>;
   let effects: DetailEffects;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [
-        DetailEffects,
-        provideMockActions(() => actions$)
-      ]
-    });
+    effectsTestBed(DetailEffects, actions$);
 
     effects = TestBed.get(DetailEffects);
   });

@@ -1,13 +1,14 @@
-import { reducer, initialState } from './person.reducer';
+import { personInitialState, personReducer } from './person.reducer';
+
 
 describe('Person Reducer', () => {
   describe('unknown action', () => {
     it('should return the initial state', () => {
       const action = {} as any;
 
-      const result = reducer(initialState, action);
+      const result = personReducer(personInitialState, action);
 
-      expect(result).toBe(initialState);
+      expect(result).toBe(personInitialState);
     });
   });
 });

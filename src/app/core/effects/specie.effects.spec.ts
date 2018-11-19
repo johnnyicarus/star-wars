@@ -1,20 +1,15 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { provideMockActions } from '@ngrx/effects/testing';
+import { TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 
 import { SpecieEffects } from './specie.effects';
+import { effectsTestBed } from '../../utils/tests.utils';
 
 describe('SpecieEffects', () => {
   let actions$: Observable<any>;
   let effects: SpecieEffects;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [
-        SpecieEffects,
-        provideMockActions(() => actions$)
-      ]
-    });
+    effectsTestBed(SpecieEffects, actions$);
 
     effects = TestBed.get(SpecieEffects);
   });
