@@ -278,6 +278,11 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
+"@ngrx/db@^2.2.0-beta.0":
+  version "2.2.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/db/-/db-2.2.0-beta.0.tgz#962bbc29be9a457e02e90397f420b703ab331484"
+  integrity sha512-doC0v9sR0Jc8O7MOU/GVl8McVYmkEcoEyLhtGPNSTt570f7pKh+QDJDSnp+Z2hTcrevP7c3sOZ8dfRBTnyNiBw==
+
 "@ngrx/effects@^6.1.2":
   version "6.1.2"
   resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-6.1.2.tgz#602f3ee9798e00179075ddef030ded88c28b1aa1"
@@ -4205,6 +4210,13 @@ ng-tailwindcss@^1.1.2:
     commander "^2.15.1"
     purgecss "^1.0.1"
     update-notifier "^2.5.0"
+
+ngx-take-until-destroy@^5.2.3:
+  version "5.2.3"
+  resolved "https://registry.yarnpkg.com/ngx-take-until-destroy/-/ngx-take-until-destroy-5.2.3.tgz#527cdb3520568f19c7cf010aa20e76bb5ee308f9"
+  integrity sha512-d9gblFK/kb4l2/OzuY5MK8ML2Rqs71XHq3Ks5plmCe3yKLwTnjiKNCA1E6yzpVxDYdnjbcW04rjt8RZlXUpxaA==
+  dependencies:
+    tslib "^1.9.0"
 
 nice-try@^1.0.4:
   version "1.0.5"

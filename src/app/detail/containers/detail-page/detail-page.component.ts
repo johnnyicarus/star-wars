@@ -8,6 +8,7 @@ import { DetailState } from '../../reducers/detail.reducer';
 import { map } from 'rxjs/operators';
 import { Detail } from '../../models/detail.model';
 import { LoadDetail } from '../../actions/detail.actions';
+import { untilDestroyed } from 'ngx-take-until-destroy';
 
 @Component({
   selector: 'sw-detail-page',
@@ -43,11 +44,10 @@ export class DetailPageComponent implements OnDestroy {
     private _store: Store<DetailState>,
   ) {
     this.routes = _route.params.pipe(
+      untilDestroyed(this),
       map((params: Detail) => new LoadDetail({ detail: params })),
     ).subscribe(_store);
   }
 
-  ngOnDestroy() {
-    this.routes.unsubscribe();
-  }
+  ngOnDestroy() {}
 }

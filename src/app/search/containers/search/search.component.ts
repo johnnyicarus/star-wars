@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { debounceTime, distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
@@ -6,6 +6,7 @@ import { SetSearch } from '../../actions/search.actions';
 import { selectSearchTerm } from '../../selectors/search.selectors';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SearchState } from '../../reducers/search.reducer';
+import { untilDestroyed } from 'ngx-take-until-destroy';
 
 @Component({
   selector: 'sw-search',
@@ -26,7 +27,7 @@ import { SearchState } from '../../reducers/search.reducer';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
 
   term$: Observable<string> = this._store.pipe(select(selectSearchTerm));
 
@@ -40,6 +41,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.searchUpdates$ = this._route.queryParams.pipe(
+      untilDestroyed(this),
       debounceTime(300),  // wait 300ms after each keystroke before considering the term
       distinctUntilChanged(), // ignore new term if same as previous term
       filter(params => params.search),
@@ -55,4 +57,6 @@ export class SearchComponent implements OnInit {
       this._router.navigate([ 'search' ], { queryParams: { search: encodeURIComponent(term) }, queryParamsHandling: 'merge' });
     }
   }
+
+  ngOnDestroy() {}
 }

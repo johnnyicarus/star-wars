@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { Filter, FilterChange } from '../../models/filter.model';
 import { combineLatest, Observable, Subject, Subscription } from 'rxjs';
 import { select, Store } from '@ngrx/store';
@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SearchState } from '../../reducers/search.reducer';
 import { filter, map } from 'rxjs/operators';
 import { SetFilter } from '../../actions/search.actions';
+import { untilDestroyed } from 'ngx-take-until-destroy';
 
 @Component({
   selector: 'sw-filter',
@@ -35,7 +36,7 @@ import { SetFilter } from '../../actions/search.actions';
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FilterComponent {
+export class FilterComponent implements OnDestroy {
 
   filters$: Observable<Filter> = this._store.pipe(select(selectSearchFilter));
 
@@ -51,6 +52,7 @@ export class FilterComponent {
     private _store: Store<SearchState>,
   ) {
     this.filterUpdates$ = this._route.queryParams.pipe(
+      untilDestroyed(this),
       filter(params => params.filter),
       map(params => params.filter),
       map(mapArrayToFilter),
@@ -58,6 +60,7 @@ export class FilterComponent {
     ).subscribe(this._store);
 
     this.filterMerge$ = combineLatest(this.filters$, this.filterSubject$).pipe(
+      untilDestroyed(this),
       map(([ oldFilter, filterChange ]: [ Filter, FilterChange ]) => ({
         ...oldFilter,
         [filterChange.name]: filterChange.value,
@@ -69,6 +72,8 @@ export class FilterComponent {
   updateFilter(event: FilterChange) {
     this.filterSubject$.next(event);
   }
+
+  ngOnDestroy() {}
 }
 
 const mapArrayToFilter = (array: string[]): Filter => ({
