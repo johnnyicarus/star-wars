@@ -9,6 +9,7 @@ import { AuthService } from '../services/auth.service';
 import { AuthState } from '../reducers/auth.reducer';
 import { Action, select, Store } from '@ngrx/store';
 import { selectUser } from '../selectors/auth.selectors';
+import { getCookie } from '../../utils/cookie.utils';
 
 
 @Injectable()
@@ -33,9 +34,28 @@ export class AuthEffects {
     tap(([action, user]: [Action, string]) => {
       // Provide very simple login caching
       // Unsafe
-      document.cookie = `lastCached=${new Date().getTime()}`;
-      document.cookie = `userName=${user}`;
-      this._router.navigate(['/']);
+      const cacheDate = parseInt(getCookie('lastCached'), 10);
+      if (!cacheDate) {
+        document.cookie = `lastCached=${new Date().getTime()}`;
+        document.cookie = `userName=${user}`;
+      }
+      this._router.navigate(['/search']);
+    })
+  );
+
+  @Effect({ dispatch: false })
+  loginSuccessNoRedirect$ = this._actions$.pipe(
+    ofType(AuthActionTypes.LoginSuccessNoRedirect),
+    withLatestFrom(this._store.pipe(select(selectUser))),
+    tap(([action, user]: [Action, string]) => {
+      // Provide very simple login caching
+      // Unsafe
+      const cacheDate = parseInt(getCookie('lastCached'), 10);
+      if (!cacheDate) {
+        document.cookie = `lastCached=${new Date().getTime()}`;
+        document.cookie = `userName=${user}`;
+      }
+      // this._router.navigate(['']);
     })
   );
 

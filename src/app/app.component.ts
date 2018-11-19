@@ -25,14 +25,6 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Provide very simple login state caching
-    // This is just for demonstration purposes
-    // It is unsafe and can be very easily mocked
-    const cacheDate = parseInt(getCookie('lastCached'), 10);
 
-    if (!!cacheDate && (Date.now() < cacheDate + (60 * 60 * 24 * 14))) {
-      const user = getCookie('userName');
-      this._store.dispatch(new LoginSuccess({ user }));
-    }
   }
 }

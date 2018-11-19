@@ -27,6 +27,7 @@ export function authReducer(state = authInitialState, action: AuthActions): Auth
         pending: false,
       };
     case AuthActionTypes.LoginSuccess:
+    case AuthActionTypes.LoginSuccessNoRedirect:
       return {
         ...state,
         user: action.payload.user,
