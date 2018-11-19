@@ -5,7 +5,7 @@ export const selectAuthState = createFeatureSelector<AuthState>('auth');
 
 const getUser = (state: AuthState): string => state.user;
 
-const selectUser = createSelector(
+export const selectUser = createSelector(
   selectAuthState,
   getUser,
 );

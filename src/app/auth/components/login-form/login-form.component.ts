@@ -34,14 +34,14 @@ import styleConfig from '../../../../../tailwind.js';
           </div>
           <div>
             <p *ngIf="error"
-               class="h-8x p-3x bg-red border-b border-solid border-red-dark border-t">
+               class="h-8x p-3x leading-none bg-red border-b border-solid border-red-dark border-t">
               {{ error }}
             </p>
           </div>
           <div>
             <button type="submit"
                     [disabled]="!form.valid"
-                    class="w-full h-8x p-3x hover:bg-grey-lightest focus:outline-none">
+                    class="w-full h-8x p-3x hover:bg-material-blue hover:text-white focus:outline-none transition rounded-b">
               Log in
             </button>
           </div>
@@ -52,6 +52,7 @@ import styleConfig from '../../../../../tailwind.js';
   styles: [
     `button:disabled {
       background: #ffffff; /* TODO Use tailwind config */
+      color: black;
       cursor: not-allowed;
     }`,
     `.has-error {

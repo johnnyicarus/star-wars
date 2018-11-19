@@ -76,6 +76,8 @@ let colors = {
   'material-pink-light': '#ff80ab',
   'material-pink-dark': '#f50057',
 
+  'material-blue': '#355C7D',
+
   'transparent': 'transparent',
 
   'black': '#22292f',

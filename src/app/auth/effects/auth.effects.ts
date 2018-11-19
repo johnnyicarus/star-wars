@@ -2,10 +2,13 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, exhaustMap, map, tap } from 'rxjs/operators';
+import { catchError, exhaustMap, map, tap, withLatestFrom } from 'rxjs/operators';
 import { Credentials } from '../models/credentials.model';
 import { AuthActionTypes, Login, LoginFailure, LoginSuccess } from '../actions/auth.actions';
 import { AuthService } from '../services/auth.service';
+import { AuthState } from '../reducers/auth.reducer';
+import { Action, select, Store } from '@ngrx/store';
+import { selectUser } from '../selectors/auth.selectors';
 
 
 @Injectable()
@@ -26,7 +29,14 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   loginSuccess$ = this._actions$.pipe(
     ofType(AuthActionTypes.LoginSuccess),
-    tap(() => this._router.navigate(['/']))
+    withLatestFrom(this._store.pipe(select(selectUser))),
+    tap(([action, user]: [Action, string]) => {
+      // Provide very simple login caching
+      // Unsafe
+      document.cookie = `lastCached=${new Date().getTime()}`;
+      document.cookie = `userName=${user}`;
+      this._router.navigate(['/']);
+    })
   );
 
   @Effect({ dispatch: false })
@@ -39,5 +49,6 @@ export class AuthEffects {
     private _actions$: Actions,
     private _authService: AuthService,
     private _router: Router,
+    private _store: Store<AuthState>,
   ) {}
 }
