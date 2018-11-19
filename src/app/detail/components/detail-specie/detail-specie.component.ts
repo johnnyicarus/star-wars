@@ -49,7 +49,7 @@ import { config } from '../../../app.config';
       <div class="c-detail__container">
         <p>Language: <span class="font-semibold">{{ specie.language }}</span></p>
         <p>Average lifespan: <span class="font-semibold">{{ specie.average_lifespan }}</span></p>
-        <p>Average height: <span class="font-semibold">{{ specie.height | swHeight }}</span></p>
+        <p>Average height: <span class="font-semibold">{{ specie.average_height | swHeight }}</span></p>
         <p>Skin: <span class="font-semibold">{{ specie.skin_colors }}</span></p>
         <p>Eyes: <span class="font-semibold">{{ specie.eye_colors }}</span></p>
       </div>

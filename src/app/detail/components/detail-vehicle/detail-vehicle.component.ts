@@ -38,8 +38,6 @@ import { DetailState } from '../../reducers/detail.reducer';
         <p>Cost: <span class="font-semibold">{{ vehicle.cost_in_credits | number }} credits</span></p>
         <p>Length: <span class="font-semibold">{{ vehicle.length }}m</span></p>
         <p>Maximum speed (in atmosphere): <span class="font-semibold">{{ vehicle.max_atmosphering_speed }}</span></p>
-        <p>Maximum travel distance: <span class="font-semibold">{{ vehicle.MGLT }} megalights</span></p>
-        <p>Hyperdrive rating: <span class="font-semibold">{{ vehicle.hyperdrive_rating }}</span></p>
       </div>
       <div class="c-detail__container">
         <span>Pilots</span>
