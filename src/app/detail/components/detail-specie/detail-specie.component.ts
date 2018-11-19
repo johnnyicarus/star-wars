@@ -61,7 +61,7 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
         <p>Skin: <span class="font-semibold">{{ specie.skin_colors }}</span></p>
         <p>Eyes: <span class="font-semibold">{{ specie.eye_colors }}</span></p>
       </div>
-      <div class="c-detail__container text-right">
+      <div class="c-detail__container text-right border-none">
         <p>Entry created: {{ specie.created | date:'longDate' }}</p>
         <p>Entry last updated: {{ specie.edited | date:'longDate' }}</p>
       </div>

@@ -2,10 +2,17 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Person } from '../../../core/models/person.model';
 import { select, Store } from '@ngrx/store';
 import { DetailState } from '../../reducers/detail.reducer';
-import { selectDetailFilms } from '../../selectors/detail.selectors';
+import {
+  selectDetailFilms,
+  selectDetailPlanet,
+  selectDetailSpecies,
+  selectDetailStarships,
+  selectDetailVehicles,
+} from '../../selectors/detail.selectors';
 import { config } from '../../../app.config';
 import { referenceLookUp } from '../../utils/look-up.utils';
 import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'sw-detail-person',
@@ -25,32 +32,32 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
         <div class="flex">
           <p>Homeworld:</p>
           <ul class="list-reset flex">
-            <li *ngFor="let world of (films$ | async); let i=index"
+            <li *ngFor="let name of (homeworld$ | async); let i=index"
                 [@fadeEnterLeave]>
-              <a [routerLink]="['/', 'detail', 'films', getId(person.films, i)]"
-                 class="text-grey-dark hover:text-black no-underline pl-1x">{{ world }}</a>
+              <a [routerLink]="['/', 'detail', 'planets', getId(person.homeworld, i)]"
+                 class="text-grey-dark hover:text-black no-underline pl-1x">{{ name }}</a>
             </li>
           </ul>
         </div>
       </div>
       <div class="c-detail__container">
         <span>Films</span>
-        <ul class="list-reset flex">
-          <li *ngFor="let url of (films$ | async); let i=index"
+        <ul class="list-reset flex flex-wrap">
+          <li *ngFor="let name of (films$ | async); let i=index"
               [@fadeEnterLeave]>
             <a [routerLink]="['/', 'detail', 'films', getId(person.films, i)]"
-               class="text-grey-dark hover:text-black no-underline pr-1x">{{url}}</a>
+               class="text-grey-dark hover:text-black no-underline pr-1x">{{ name }}</a>
           </li>
         </ul>
       </div>
       <div class="c-detail__container">
         <div class="flex">
-          <p>Species:</p>
+          <span>Species:</span>
           <ul class="list-reset flex">
-            <li *ngFor="let world of (films$ | async); let i=index"
+            <li *ngFor="let name of (species$ | async); let i=index"
                 [@fadeEnterLeave]>
-              <a [routerLink]="['/', 'detail', 'films', getId(person.films, i)]"
-                 class="text-grey-dark hover:text-black no-underline pl-1x">{{ world }}</a>
+              <a [routerLink]="['/', 'detail', 'species', getId(person.films, i)]"
+                 class="text-grey-dark hover:text-black no-underline pl-1x">{{ name }}</a>
             </li>
           </ul>
         </div>
@@ -63,23 +70,25 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
       </div>
       <div class="c-detail__container">
         <span>Spaceships</span>
-        <ul class="list-reset flex">
-          <li *ngFor="let url of (films$ | async); let i=index"
+        <ul class="list-reset flex flex-wrap">
+          <li *ngFor="let name of (starships$ | async); let i=index"
               [@fadeEnterLeave]>
-            <a [routerLink]="['/', 'detail', 'films', getId(person.films, i)]"
-               class="text-grey-dark hover:text-black no-underline pr-1x">{{url}}</a>
-          </li>
-        </ul>
-        <span>Vehicles</span>
-        <ul class="list-reset flex">
-          <li *ngFor="let url of (films$ | async); let i=index"
-              [@fadeEnterLeave]>
-            <a [routerLink]="['/', 'detail', 'films', getId(person.films, i)]"
-               class="text-grey-dark hover:text-black no-underline pr-1x">{{url}}</a>
+            <a [routerLink]="['/', 'detail', 'starships', getId(person.starships, i)]"
+               class="text-grey-dark hover:text-black no-underline pr-1x">{{ name }}</a>
           </li>
         </ul>
       </div>
-      <div class="c-detail__container text-right">
+      <div class="c-detail__container">
+        <span>Vehicles</span>
+        <ul class="list-reset flex flex-wrap">
+          <li *ngFor="let name of (vehicles$ | async); let i=index"
+              [@fadeEnterLeave]>
+            <a [routerLink]="['/', 'detail', 'vehicles', getId(person.vehicles, i)]"
+               class="text-grey-dark hover:text-black no-underline pr-1x">{{ name }}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="c-detail__container text-right border-none">
         <p>Entry created: {{ person.created | date:'longDate' }}</p>
         <p>Entry last updated: {{ person.edited | date:'longDate' }}</p>
       </div>
@@ -105,11 +114,23 @@ export class DetailPersonComponent {
 
   @Input()
   set person(value: Person) {
+    referenceLookUp([ value.homeworld ], 'planets', this._store);
     referenceLookUp(value.films, 'films', this._store);
+    referenceLookUp(value.species, 'species', this._store);
+    referenceLookUp(value.starships, 'starships', this._store);
+    referenceLookUp(value.vehicles, 'vehicles', this._store);
     this._person = value;
   }
 
   films$ = this._store.pipe(select(selectDetailFilms));
+
+  homeworld$ = this._store.pipe(select(selectDetailPlanet, 'homeworld'));
+
+  species$: Observable<string[]> = this._store.pipe(select(selectDetailSpecies, 'species'));
+
+  starships$: Observable<string[]> = this._store.pipe(select(selectDetailStarships, 'starships'));
+
+  vehicles$: Observable<string[]> = this._store.pipe(select(selectDetailVehicles, 'vehicles'));
 
   constructor(
     private _store: Store<DetailState>,

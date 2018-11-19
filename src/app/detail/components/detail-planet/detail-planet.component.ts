@@ -50,7 +50,7 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
         <p>Rotation period: <span class="font-semibold">{{ planet.rotation_period }}h</span></p>
         <p>Orbital period: <span class="font-semibold">{{ planet.orbital_period }} days</span></p>
       </div>
-      <div class="c-detail__container text-right">
+      <div class="c-detail__container text-right border-none">
         <p>Entry created: {{ planet.created | date:'longDate' }}</p>
         <p>Entry last updated: {{ planet.edited | date:'longDate' }}</p>
       </div>

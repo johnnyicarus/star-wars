@@ -1,4 +1,29 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html {
+  font-size: 1em;
+}
+
+@media (min-width: 768px) {
+
+  html {
+    font-size: 1.125em;
+  }
+}
+
+@media (min-width: 992px) {
+
+  html {
+    font-size: 1.25em;
+  }
+}
+
+body {
+  font-size: 1rem;
+  line-height: 1.5;
+  background: linear-gradient(to left, #C06C84, #6C5B7B, #355C7D);
+}
+
 /**
  * This injects Tailwind's base styles, which is a combination of
  * Normalize.css and some additional base styles.
@@ -37,7 +62,7 @@
  * @import "components/forms";
  */
 .c-detail {
-  @apply mt-8x mx-2x bg-white rounded shadow-md max-w-lg mx-auto;
+  @apply bg-white rounded shadow-md ;
 }
 
 .c-detail__container {
@@ -71,29 +96,6 @@
 /**
  * Responsive typography
  */
-html {
-  font-size: 1em;
-}
-
-@media (min-width: 768px) {
-
-  html {
-    font-size: 1.125em;
-  }
-}
-
-@media (min-width: 992px) {
-
-  html {
-    font-size: 1.25em;
-  }
-}
-
-body {
-  font-size: 1rem;
-  line-height: 1.5;
-  background: linear-gradient(to left, #C06C84, #6C5B7B, #355C7D);
-}
 
 /**
  * Hidden - utility class for a11y
@@ -113,4 +115,8 @@ body {
 
 .transition {
   transition: all 150ms ease;
+}
+
+.text-shadow {
+  text-shadow: 0 1px 2px black;
 }

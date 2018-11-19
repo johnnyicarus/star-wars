@@ -50,7 +50,7 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
         <ul class="list-reset flex flex-wrap">
           <li *ngFor="let name of (planets$ | async); let i=index"
               [@fadeEnterLeave]>
-            <a [routerLink]="['/', 'detail', 'people', getId(film.planets, i)]"
+            <a [routerLink]="['/', 'detail', 'planets', getId(film.planets, i)]"
                class="text-grey-dark hover:text-black no-underline pr-1x">{{ name }}</a>
           </li>
         </ul>
@@ -85,7 +85,7 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
           </li>
         </ul>
       </div>
-      <div class="c-detail__container text-right">
+      <div class="c-detail__container text-right border-none">
         <p>Entry created: {{ film.created | date:'longDate' }}</p>
         <p>Entry last updated: {{ film.edited | date:'longDate' }}</p>
       </div>

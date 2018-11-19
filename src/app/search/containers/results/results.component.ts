@@ -9,7 +9,7 @@ import { selectEntitiesForDisplay } from '../../../core/selectors/entities.selec
 @Component({
   selector: 'sw-results',
   template: `
-    <ul class="list-reset w-full flex flex-col pt-25x md:pt-19x lg:pt-13x">
+    <ul class="list-reset w-full flex flex-col pt-25x md:pt-19x lg:pt-13x px-2x">
       <sw-result-card *ngFor="let result of (results$ | async)"
                       [card]="result"></sw-result-card>
     </ul>

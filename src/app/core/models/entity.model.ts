@@ -11,6 +11,11 @@ import { SpecieState } from '../reducers/specie.reducer';
 import { StarshipState } from '../reducers/starship.reducer';
 import { VehicleState } from '../reducers/vehicle.reducer';
 
+export interface Initiation {
+  term: string;
+  loadMore: boolean;
+}
+
 // For types, a plural form is used (like in the api)
 export type EntityType = 'films' | 'people' | 'planets' | 'species' | 'starships' | 'vehicles';
 

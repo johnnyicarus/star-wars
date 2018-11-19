@@ -13,7 +13,10 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
 @Component({
   selector: 'sw-detail-page',
   template: `
-    <div class="mb-8x">
+    <div class="mb-8x mt-8x px-2x max-w-lg mx-auto">
+      <a routerLink="/search" class="leading-3x pb-1x block text-white text-shadow no-underline hover:text-material-pink transition">
+        ⇦ Back to search
+      </a>
       <sw-detail-film *ngIf="(detail$ | async).type === 'films'"
                       [film]="detail$ | async"></sw-detail-film>
       <sw-detail-person *ngIf="(detail$ | async).type === 'people'"

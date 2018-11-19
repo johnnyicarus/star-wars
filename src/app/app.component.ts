@@ -13,6 +13,7 @@ import { LoginSuccess } from './auth/actions/auth.actions';
     <main>
       <router-outlet></router-outlet>
     </main>
+    <sw-colophon></sw-colophon>
   `,
   styles: []
 })

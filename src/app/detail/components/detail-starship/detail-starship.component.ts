@@ -57,7 +57,7 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
           </li>
         </ul>
       </div>
-      <div class="c-detail__container text-right">
+      <div class="c-detail__container text-right border-none">
         <p>Entry created: {{ starship.created | date:'longDate' }}</p>
         <p>Entry last updated: {{ starship.edited | date:'longDate' }}</p>
       </div>
