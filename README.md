@@ -2,6 +2,8 @@
 
 The Star Wars Search engine.
 
+Username and passwort are "admin". Login saves a cookie with a date on your machine so you won't have to enter any more login information for the next 14 days.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.5.
 
 ## Requirements
