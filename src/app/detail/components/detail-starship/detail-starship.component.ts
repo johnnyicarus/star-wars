@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Starship } from '../../../core/models/starship.model';
 import { referenceLookUp } from '../../utils/look-up.utils';
 import { select, Store } from '@ngrx/store';
-import { selectDetailFilms } from '../../selectors/detail.selectors';
+import { selectDetailFilms, selectDetailPeople } from '../../selectors/detail.selectors';
 import { DetailState } from '../../reducers/detail.reducer';
 import { config } from '../../../app.config';
 
@@ -16,16 +16,9 @@ import { config } from '../../../app.config';
         <h1 class="text-4xl leading-4x pt-5x">{{ starship.name }}</h1>
       </div>
       <div class="c-detail__container">
-        <p>Born: <span class="font-semibold">{{ starship.birth_year }}</span></p>
-        <div class="flex">
-          <p>Homeworld:</p>
-          <ul class="list-reset flex">
-            <li *ngFor="let world of (films$ | async); let i=index">
-              <a [routerLink]="['/', 'detail', 'films', getId(starship.films, i)]"
-                 class="text-grey-dark hover:text-black no-underline pl-1x">{{ world }}</a>
-            </li>
-          </ul>
-        </div>
+        <p>Official model name: <span class="font-semibold">{{ starship.model }}</span></p>
+        <p>Class: <span class="font-semibold">{{ starship.starship_class }}</span></p>
+        <p>Manufacturer: <span class="font-semibold">{{ starship.manufacturer }}</span></p>
       </div>
       <div class="c-detail__container">
         <span>Films</span>
@@ -37,35 +30,23 @@ import { config } from '../../../app.config';
         </ul>
       </div>
       <div class="c-detail__container">
-        <div class="flex">
-          <p>Species:</p>
-          <ul class="list-reset flex">
-            <li *ngFor="let world of (films$ | async); let i=index">
-              <a [routerLink]="['/', 'detail', 'films', getId(starship.films, i)]"
-                 class="text-grey-dark hover:text-black no-underline pl-1x">{{ world }}</a>
-            </li>
-          </ul>
-        </div>
-        <p>Skin: <span class="font-semibold">{{ starship.skin_color }}</span></p>
-        <p>Hair: <span class="font-semibold">{{ starship.hair_color }}</span></p>
-        <p>Eyes: <span class="font-semibold">{{ starship.eye_color }}</span></p>
-        <p>Gender: <span class="font-semibold">{{ starship.gender }}</span></p>
-        <p>Height: <span class="font-semibold">{{ starship.height | swHeight }}</span></p>
-        <p>Mass: <span class="font-semibold">{{ starship.mass }}kg</span></p>
+        <p>Crew: <span class="font-semibold">{{ starship.crew }}</span></p>
+        <p>Passengers: <span class="font-semibold">{{ starship.passengers }}</span></p>
+        <p>Consumables: <span class="font-semibold">{{ starship.consumables }}</span></p>
       </div>
       <div class="c-detail__container">
-        <span>Spaceships</span>
+        <p>Cost: <span class="font-semibold">{{ starship.cost_in_credits | number }} credits</span></p>
+        <p>Length: <span class="font-semibold">{{ starship.length }}m</span></p>
+        <p>Maximum speed (in atmosphere): <span class="font-semibold">{{ starship.max_atmosphering_speed }}</span></p>
+        <p>Maximum travel distance: <span class="font-semibold">{{ starship.MGLT }} megalights</span></p>
+        <p>Hyperdrive rating: <span class="font-semibold">{{ starship.hyperdrive_rating }}</span></p>
+      </div>
+      <div class="c-detail__container">
+        <span>Pilots</span>
         <ul class="list-reset flex">
-          <li *ngFor="let url of (films$ | async); let i=index">
-            <a [routerLink]="['/', 'detail', 'films', getId(starship.films, i)]"
-               class="text-grey-dark hover:text-black no-underline pr-1x">{{url}}</a>
-          </li>
-        </ul>
-        <span>Vehicles</span>
-        <ul class="list-reset flex">
-          <li *ngFor="let url of (films$ | async); let i=index">
-            <a [routerLink]="['/', 'detail', 'films', getId(starship.films, i)]"
-               class="text-grey-dark hover:text-black no-underline pr-1x">{{url}}</a>
+          <li *ngFor="let name of (pilots$ | async); let i=index">
+            <a [routerLink]="['/', 'detail', 'films', getId(starship.pilots, i)]"
+               class="text-grey-dark hover:text-black no-underline pr-1x">{{ name }}</a>
           </li>
         </ul>
       </div>
@@ -89,10 +70,13 @@ export class DetailStarshipComponent {
   @Input()
   set starship(value: Starship) {
     referenceLookUp(value.films, 'films', this._store);
+    referenceLookUp(value.pilots, 'people', this._store);
     this._starship = value;
   }
 
   films$ = this._store.pipe(select(selectDetailFilms));
+
+  pilots$ = this._store.pipe(select(selectDetailPeople, 'pilots'));
 
   constructor(
     private _store: Store<DetailState>,

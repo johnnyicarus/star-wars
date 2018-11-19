@@ -14,6 +14,14 @@ import { GetResult } from '../../core/models/requests.model';
 import { Entity } from '../../core/models/entity.model';
 import { Film } from '../../core/models/film.model';
 import { Person } from '../../core/models/person.model';
+import { AddPlanet } from '../../core/actions/planet.actions';
+import { Planet } from '../../core/models/planet.model';
+import { Specie } from '../../core/models/specie.model';
+import { AddSpecie } from '../../core/actions/specie.actions';
+import { AddStarship } from '../../core/actions/starship.actions';
+import { Starship } from '../../core/models/starship.model';
+import { AddVehicle } from '../../core/actions/vehicle.actions';
+import { Vehicle } from '../../core/models/vehicle.model';
 
 @Injectable()
 export class DetailEffects {
@@ -55,5 +63,13 @@ const mapToAction = (entity: Entity) => {
       return new AddFilm({ entity: <Film>entity });
     case 'people':
       return new AddPerson({ entity: <Person>entity });
+    case 'planets':
+      return new AddPlanet({ entity: <Planet>entity });
+    case 'species':
+      return new AddSpecie({ entity: <Specie>entity });
+    case 'starships':
+      return new AddStarship({ entity: <Starship>entity});
+    case 'vehicles':
+      return new AddVehicle({ entity: <Vehicle>entity });
   }
-}
+};

@@ -1,8 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Vehicle } from '../../../core/models/vehicle.model';
 import { referenceLookUp } from '../../utils/look-up.utils';
 import { select, Store } from '@ngrx/store';
-import { selectDetailFilms } from '../../selectors/detail.selectors';
+import { selectDetailFilms, selectDetailPeople } from '../../selectors/detail.selectors';
 import { config } from '../../../app.config';
 import { DetailState } from '../../reducers/detail.reducer';
 
@@ -16,16 +16,9 @@ import { DetailState } from '../../reducers/detail.reducer';
         <h1 class="text-4xl leading-4x pt-5x">{{ vehicle.name }}</h1>
       </div>
       <div class="c-detail__container">
-        <p>Born: <span class="font-semibold">{{ vehicle.birth_year }}</span></p>
-        <div class="flex">
-          <p>Homeworld:</p>
-          <ul class="list-reset flex">
-            <li *ngFor="let world of (films$ | async); let i=index">
-              <a [routerLink]="['/', 'detail', 'films', getId(vehicle.films, i)]"
-                 class="text-grey-dark hover:text-black no-underline pl-1x">{{ world }}</a>
-            </li>
-          </ul>
-        </div>
+        <p>Official model name: <span class="font-semibold">{{ vehicle.model }}</span></p>
+        <p>Class: <span class="font-semibold">{{ vehicle.vehicle_class }}</span></p>
+        <p>Manufacturer: <span class="font-semibold">{{ vehicle.manufacturer }}</span></p>
       </div>
       <div class="c-detail__container">
         <span>Films</span>
@@ -37,35 +30,23 @@ import { DetailState } from '../../reducers/detail.reducer';
         </ul>
       </div>
       <div class="c-detail__container">
-        <div class="flex">
-          <p>Species:</p>
-          <ul class="list-reset flex">
-            <li *ngFor="let world of (films$ | async); let i=index">
-              <a [routerLink]="['/', 'detail', 'films', getId(vehicle.films, i)]"
-                 class="text-grey-dark hover:text-black no-underline pl-1x">{{ world }}</a>
-            </li>
-          </ul>
-        </div>
-        <p>Skin: <span class="font-semibold">{{ vehicle.skin_color }}</span></p>
-        <p>Hair: <span class="font-semibold">{{ vehicle.hair_color }}</span></p>
-        <p>Eyes: <span class="font-semibold">{{ vehicle.eye_color }}</span></p>
-        <p>Gender: <span class="font-semibold">{{ vehicle.gender }}</span></p>
-        <p>Height: <span class="font-semibold">{{ vehicle.height | swHeight }}</span></p>
-        <p>Mass: <span class="font-semibold">{{ vehicle.mass }}kg</span></p>
+        <p>Crew: <span class="font-semibold">{{ vehicle.crew }}</span></p>
+        <p>Passengers: <span class="font-semibold">{{ vehicle.passengers }}</span></p>
+        <p>Consumables: <span class="font-semibold">{{ vehicle.consumables }}</span></p>
       </div>
       <div class="c-detail__container">
-        <span>Spaceships</span>
+        <p>Cost: <span class="font-semibold">{{ vehicle.cost_in_credits | number }} credits</span></p>
+        <p>Length: <span class="font-semibold">{{ vehicle.length }}m</span></p>
+        <p>Maximum speed (in atmosphere): <span class="font-semibold">{{ vehicle.max_atmosphering_speed }}</span></p>
+        <p>Maximum travel distance: <span class="font-semibold">{{ vehicle.MGLT }} megalights</span></p>
+        <p>Hyperdrive rating: <span class="font-semibold">{{ vehicle.hyperdrive_rating }}</span></p>
+      </div>
+      <div class="c-detail__container">
+        <span>Pilots</span>
         <ul class="list-reset flex">
-          <li *ngFor="let url of (films$ | async); let i=index">
-            <a [routerLink]="['/', 'detail', 'films', getId(vehicle.films, i)]"
-               class="text-grey-dark hover:text-black no-underline pr-1x">{{url}}</a>
-          </li>
-        </ul>
-        <span>Vehicles</span>
-        <ul class="list-reset flex">
-          <li *ngFor="let url of (films$ | async); let i=index">
-            <a [routerLink]="['/', 'detail', 'films', getId(vehicle.films, i)]"
-               class="text-grey-dark hover:text-black no-underline pr-1x">{{url}}</a>
+          <li *ngFor="let name of (pilots$ | async); let i=index">
+            <a [routerLink]="['/', 'detail', 'films', getId(vehicle.pilots, i)]"
+               class="text-grey-dark hover:text-black no-underline pr-1x">{{ name }}</a>
           </li>
         </ul>
       </div>
@@ -89,10 +70,13 @@ export class DetailVehicleComponent {
   @Input()
   set vehicle(value: Vehicle) {
     referenceLookUp(value.films, 'films', this._store);
+    referenceLookUp(value.pilots, 'people', this._store);
     this._vehicle = value;
   }
 
   films$ = this._store.pipe(select(selectDetailFilms));
+
+  pilots$ = this._store.pipe(select(selectDetailPeople, 'pilots'));
 
   constructor(
     private _store: Store<DetailState>,

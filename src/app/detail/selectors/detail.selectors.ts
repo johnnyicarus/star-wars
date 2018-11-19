@@ -62,20 +62,59 @@ export const selectCurrentEntity = createSelector(
   getCurrentEntity,
 );
 
-const getFilmTitle = (current: Person, films: Dictionary<Film>): string[] =>
+const getFilmTitles = (current: Person | Planet, films: Dictionary<Film>): string[] =>
   current.films.map((url: string): string => get(films, [ url.match(config.idRegExp)[1], 'title' ], ''));
 
 export const selectDetailFilms = createSelector(
   selectCurrentEntity,
   selectFilmEntities,
-  getFilmTitle,
+  getFilmTitles,
 );
 
-const getCharacterName = (current: Film, people: Dictionary<Person>): string[] =>
-  current.characters.map((url: string): string => get(people, [ url.match(config.idRegExp)[1], 'name' ], ''));
+const mapToNames = (urls: string[], dictionary: Dictionary<Entity>): string[] =>
+  urls.map((url: string): string => get(dictionary, [ url.match(config.idRegExp)[1], 'name' ], ''));
 
-export const selectDetailCharacters = createSelector(
+const getName = (current: Specie, entity: Dictionary<Entity>, key: string): string[] =>
+  mapToNames([ current[key] ], entity);
+
+const getNames = (current: Planet, entity: Dictionary<Entity>, key: string): string[] =>
+  mapToNames(current[key], entity);
+
+export const selectDetailPeople = createSelector(
   selectCurrentEntity,
   selectPersonEntities,
-  getCharacterName,
+  getNames,
 );
+
+export const selectDetailPlanet = createSelector(
+  selectCurrentEntity,
+  selectPlanetEntities,
+  getName,
+);
+
+export const selectDetailPlanets = createSelector(
+  selectCurrentEntity,
+  selectPlanetEntities,
+  getNames,
+);
+
+export const selectDetailSpecies = createSelector(
+  selectCurrentEntity,
+  selectSpecieEntities,
+  getNames,
+);
+
+export const selectDetailStarships = createSelector(
+  selectCurrentEntity,
+  selectStarshipEntities,
+  getNames,
+);
+
+export const selectDetailVehicles = createSelector(
+  selectCurrentEntity,
+  selectVehicleEntities,
+  getNames,
+);
+
+
+
