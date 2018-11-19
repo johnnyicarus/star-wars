@@ -5,6 +5,8 @@ import { Store } from '@ngrx/store';
 import { DetailState } from '../reducers/detail.reducer';
 
 export const referenceLookUp = (urls: string[], type: EntityType, store: Store<DetailState>) => {
+  console.log(urls);
+
   urls.map((url: string) => store.dispatch(new DetailLookup({
     detail: {
       type,

@@ -27,7 +27,7 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
       </div>
       <div class="c-detail__container">
         <span>Films</span>
-        <ul class="list-reset flex">
+        <ul class="list-reset flex flex-wrap">
           <li *ngFor="let url of (films$ | async); let i=index"
               [@fadeEnterLeave]>
             <a [routerLink]="['/', 'detail', 'films', getId(starship.films, i)]"
@@ -49,7 +49,7 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
       </div>
       <div class="c-detail__container">
         <span>Pilots</span>
-        <ul class="list-reset flex">
+        <ul class="list-reset flex flex-wrap">
           <li *ngFor="let name of (pilots$ | async); let i=index"
               [@fadeEnterLeave]>
             <a [routerLink]="['/', 'detail', 'films', getId(starship.pilots, i)]"

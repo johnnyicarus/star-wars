@@ -23,10 +23,10 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
       <div class="c-detail__container">
         <div class="flex">
           <p>Homeworld:</p>
-          <ul class="list-reset flex">
+          <ul class="list-reset flex flex-wrap">
             <li *ngFor="let name of (homeworld$ | async); let i=index"
                 [@fadeEnterLeave]>
-              <a [routerLink]="['/', 'detail', 'planets', getId(specie.homeworld, i)]"
+              <a [routerLink]="['/', 'detail', 'planets', getId([ specie.homeworld ], i)]"
                  class="text-grey-dark hover:text-black no-underline pl-1x">{{ name }}</a>
             </li>
           </ul>
@@ -36,17 +36,17 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
       </div>
       <div class="c-detail__container">
         <span>Members</span>
-        <ul class="list-reset flex">
+        <ul class="list-reset flex flex-wrap">
           <li *ngFor="let name of (members$ | async); let i=index"
               [@fadeEnterLeave]>
-            <a [routerLink]="['/', 'detail', 'films', getId(specie.people, i)]"
+            <a [routerLink]="['/', 'detail', 'people', getId(specie.people, i)]"
                class="text-grey-dark hover:text-black no-underline pr-1x">{{name}}</a>
           </li>
         </ul>
       </div>
       <div class="c-detail__container">
         <span>Films</span>
-        <ul class="list-reset flex">
+        <ul class="list-reset flex flex-wrap">
           <li *ngFor="let title of (films$ | async); let i=index"
               [@fadeEnterLeave]>
             <a [routerLink]="['/', 'detail', 'films', getId(specie.films, i)]"
@@ -87,7 +87,10 @@ export class DetailSpecieComponent {
 
   @Input()
   set specie(value: Specie) {
-    referenceLookUp([ value.homeworld ], 'planets', this._store);
+    // value.homeworld could be null
+    if (value.homeworld) {
+      referenceLookUp([ value.homeworld ], 'planets', this._store);
+    }
     referenceLookUp(value.films, 'films', this._store);
     referenceLookUp(value.people, 'people', this._store);
     this._specie = value;
