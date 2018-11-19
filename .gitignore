@@ -4,7 +4,7 @@
 /dist
 /tmp
 /out-tsc
-/src/style.css
+/src/styles.css
 
 # dependencies
 /node_modules
@@ -38,3 +38,4 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
