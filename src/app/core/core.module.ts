@@ -4,13 +4,21 @@ import { NotFoundPageComponent } from './containers/not-found-page/not-found-pag
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { RouterModule } from '@angular/router';
 import { ColophonComponent } from './components/colophon/colophon.component';
+import { HttpErrorInterceptor } from './interceptors/error.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
   ],
-  declarations: [ NotFoundPageComponent, NavBarComponent, ColophonComponent ],
-  exports: [ NotFoundPageComponent, NavBarComponent, ColophonComponent ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true,
+    },
+  ],
+
 })
 export class CoreModule { }
