@@ -58,7 +58,7 @@ import { Observable } from 'rxjs';
           <ul class="list-reset flex flex-wrap">
             <li *ngFor="let name of (species$ | async); let i=index"
                 [@fadeEnterLeave]>
-              <a [routerLink]="['/', 'detail', 'species', getId(person.films, i)]"
+              <a [routerLink]="['/', 'detail', 'species', getId(person.species, i)]"
                  class="text-grey-dark hover:text-black no-underline pl-1x">{{ name }}</a>
             </li>
           </ul>

@@ -42,7 +42,17 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
         <p>Consumables: <span class="font-semibold">{{ vehicle.consumables }}</span></p>
       </div>
       <div class="c-detail__container">
-        <p>Cost: <span class="font-semibold">{{ vehicle.cost_in_credits | number }} credits</span></p>
+        <p *ngIf="vehicle.cost_in_credits !== 'unknown'">Population:
+          <span class="font-semibold">
+            {{ vehicle.cost_in_credits | number }}
+          </span>
+        </p>
+        <p *ngIf="vehicle.cost_in_credits === 'unknown'">
+          Population:
+          <span class="font-semibold">
+            {{ vehicle.cost_in_credits }}
+          </span>
+        </p>
         <p>Length: <span class="font-semibold">{{ vehicle.length }}m</span></p>
         <p>Maximum speed (in atmosphere): <span class="font-semibold">{{ vehicle.max_atmosphering_speed }}</span></p>
       </div>

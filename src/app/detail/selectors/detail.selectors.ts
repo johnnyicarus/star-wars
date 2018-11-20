@@ -13,6 +13,7 @@ import { selectStarshipEntities } from '../../core/selectors/starship.selectors'
 import { selectVehicleEntities } from '../../core/selectors/vehicle.selectors';
 import { config } from '../../app.config';
 import get from 'lodash.get';
+import defaultTo from 'lodash.defaultto';
 import { Planet } from '../../core/models/planet.model';
 import { Specie } from '../../core/models/specie.model';
 import { Starship } from '../../core/models/starship.model';
@@ -62,8 +63,14 @@ export const selectCurrentEntity = createSelector(
   getCurrentEntity,
 );
 
-const getFilmTitles = (current: Person | Planet, films: Dictionary<Film>): string[] =>
-  current.films.map((url: string): string => get(films, [ url.match(config.idRegExp)[1], 'title' ], ''));
+const getFilmTitles = (current: Person | Planet, films: Dictionary<Film>): string[] => {
+  const filmArray = current.films;
+
+  if (filmArray && filmArray.length > 0) {
+    return filmArray.map((url: string): string => get(films, [ defaultTo(url, '').match(config.idRegExp)[1], 'title' ], ''));
+  }
+};
+
 
 export const selectDetailFilms = createSelector(
   selectCurrentEntity,
@@ -71,8 +78,12 @@ export const selectDetailFilms = createSelector(
   getFilmTitles,
 );
 
-const mapToNames = (urls: string[], dictionary: Dictionary<Entity>): string[] =>
-  urls.map((url: string): string => get(dictionary, [ url.match(config.idRegExp)[1], 'name' ], ''));
+const mapToNames = (urls: string[], dictionary: Dictionary<Entity>): string[] => {
+
+  if (urls && urls.length > 0) {
+    return urls.map((url: string): string => get(dictionary, [ defaultTo(url, '').match(config.idRegExp)[1], 'name' ], ''));
+  }
+};
 
 const getName = (current: Specie, entity: Dictionary<Entity>, key: string): string[] =>
   mapToNames([ current[key] ], entity);
