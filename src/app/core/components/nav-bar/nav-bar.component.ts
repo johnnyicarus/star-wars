@@ -9,7 +9,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
           <a routerLink=""
              queryParamsHandling="merge" 
              class="text-black flex-no-grow flex-no-shrink relative py-1x px-2x leading-none no-underline flex items-center hover:bg-material-blue hover:text-white font-semibold transition">
-            Star Search
+            Star-Wars-Opedia
           </a>
           <!-- TODO query params handling doesn't seem necessary -->
         </div>

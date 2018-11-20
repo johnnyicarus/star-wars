@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { getCookie } from './utils/cookie.utils';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthState } from './auth/reducers/auth.reducer';
 import { select, Store } from '@ngrx/store';
 import { selectUser } from './auth/selectors/auth.selectors';
-import { LoginSuccess } from './auth/actions/auth.actions';
 import { selectErrorBoolean } from './core/selectors/error.selectors';
 
 @Component({
