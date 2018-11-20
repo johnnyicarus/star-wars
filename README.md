@@ -1,4 +1,4 @@
-# [Star Search](https://star-wars-opedia.netlify.com)
+# [Star-Warso-Pedia](https://star-wars-opedia.netlify.com)
 
 The Star Wars Search engine.
 
