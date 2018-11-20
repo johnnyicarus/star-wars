@@ -31,7 +31,8 @@ import { Observable } from 'rxjs';
         <p>Born: <span class="font-semibold">{{ person.birth_year }}</span></p>
         <div class="flex">
           <p>Homeworld:</p>
-          <ul class="list-reset flex flex-wrap">
+          <ul *ngIf="person.homeworld"
+              class="list-reset flex flex-wrap">
             <li *ngFor="let name of (homeworld$ | async); let i=index"
                 [@fadeEnterLeave]>
               <a [routerLink]="['/', 'detail', 'planets', getId([ person.homeworld ], i)]"
@@ -40,7 +41,8 @@ import { Observable } from 'rxjs';
           </ul>
         </div>
       </div>
-      <div class="c-detail__container">
+      <div *ngIf="(films$ | async)?.length > 0"
+           class="c-detail__container">
         <span>Films</span>
         <ul class="list-reset flex flex-wrap">
           <li *ngFor="let name of (films$ | async); let i=index"
@@ -51,7 +53,7 @@ import { Observable } from 'rxjs';
         </ul>
       </div>
       <div class="c-detail__container">
-        <div class="flex">
+        <div class="flex" *ngIf="(species$ | async)?.length > 0">
           <span>Species:</span>
           <ul class="list-reset flex flex-wrap">
             <li *ngFor="let name of (species$ | async); let i=index"

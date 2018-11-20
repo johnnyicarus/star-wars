@@ -25,7 +25,8 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
         <p>Class: <span class="font-semibold">{{ starship.starship_class }}</span></p>
         <p>Manufacturer: <span class="font-semibold">{{ starship.manufacturer }}</span></p>
       </div>
-      <div class="c-detail__container">
+      <div *ngIf="(films$ | async)?.length > 0"
+           class="c-detail__container">
         <span>Films</span>
         <ul class="list-reset flex flex-wrap">
           <li *ngFor="let url of (films$ | async); let i=index"
@@ -47,7 +48,8 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
         <p>Maximum travel distance: <span class="font-semibold">{{ starship.MGLT }} megalights</span></p>
         <p>Hyperdrive rating: <span class="font-semibold">{{ starship.hyperdrive_rating }}</span></p>
       </div>
-      <div class="c-detail__container">
+      <div *ngIf="(pilots$ | async)?.length > 0"
+           class="c-detail__container">
         <span>Pilots</span>
         <ul class="list-reset flex flex-wrap">
           <li *ngFor="let name of (pilots$ | async); let i=index"

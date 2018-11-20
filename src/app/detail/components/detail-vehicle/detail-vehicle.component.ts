@@ -25,7 +25,8 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
         <p>Class: <span class="font-semibold">{{ vehicle.vehicle_class }}</span></p>
         <p>Manufacturer: <span class="font-semibold">{{ vehicle.manufacturer }}</span></p>
       </div>
-      <div class="c-detail__container">
+      <div *ngIf="(films$ | async)?.length > 0"
+           class="c-detail__container">
         <span>Films</span>
         <ul class="list-reset flex flex-wrap">
           <li *ngFor="let url of (films$ | async); let i=index"
@@ -45,7 +46,8 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
         <p>Length: <span class="font-semibold">{{ vehicle.length }}m</span></p>
         <p>Maximum speed (in atmosphere): <span class="font-semibold">{{ vehicle.max_atmosphering_speed }}</span></p>
       </div>
-      <div class="c-detail__container">
+      <div *ngIf="(pilots$ | async)?.length > 0"
+           class="c-detail__container">
         <span>Pilots</span>
         <ul class="list-reset flex flex-wrap">
           <li *ngFor="let name of (pilots$ | async); let i=index"

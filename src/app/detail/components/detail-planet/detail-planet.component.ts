@@ -20,7 +20,8 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
              [offset]="offset">
         <h1 class="text-4xl leading-4x pt-5x">{{ planet.name }}</h1>
       </div>
-      <div class="c-detail__container">
+      <div *ngIf="(films$ | async)?.length > 0"
+           class="c-detail__container">
         <span>Films</span>
         <ul class="list-reset flex flex-wrap">
           <li *ngFor="let title of (films$ | async); let i=index"
@@ -30,7 +31,8 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
           </li>
         </ul>
       </div>
-      <div class="c-detail__container">
+      <div *ngIf="(residents$ | async)?.length > 0"
+           class="c-detail__container">
         <span>Residents</span>
         <ul class="list-reset flex flex-wrap">
           <li *ngFor="let name of (residents$ | async); let i=index"

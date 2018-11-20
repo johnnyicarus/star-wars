@@ -21,7 +21,7 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
         <h1 class="text-4xl leading-4x pt-5x">{{ specie.name }}</h1>
       </div>
       <div class="c-detail__container">
-        <div class="flex">
+        <div *ngIf="specie.homeworld" class="flex">
           <p>Homeworld:</p>
           <ul class="list-reset flex flex-wrap">
             <li *ngFor="let name of (homeworld$ | async); let i=index"
@@ -34,7 +34,8 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
         <p>Classification: <span class="font-semibold">{{ specie.classification }}</span></p>
         <p>Designation: <span class="font-semibold">{{ specie.designation }}</span></p>
       </div>
-      <div class="c-detail__container">
+      <div *ngIf="(members$ | async)?.length > 0"
+           class="c-detail__container">
         <span>Members</span>
         <ul class="list-reset flex flex-wrap">
           <li *ngFor="let name of (members$ | async); let i=index"
@@ -44,7 +45,8 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
           </li>
         </ul>
       </div>
-      <div class="c-detail__container">
+      <div *ngIf="(films$ | async)?.length > 0"
+           class="c-detail__container">
         <span>Films</span>
         <ul class="list-reset flex flex-wrap">
           <li *ngFor="let title of (films$ | async); let i=index"

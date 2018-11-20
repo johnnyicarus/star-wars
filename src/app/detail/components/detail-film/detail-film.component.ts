@@ -35,7 +35,8 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
         <p>Directed by: <span class="font-semibold">{{ film.director }}</span></p>
         <p>Produced by: <span class="font-semibold">{{ film.producer }}</span></p>
       </div>
-      <div class="c-detail__container">
+      <div *ngIf="(characters$ | async)?.length > 0"
+           class="c-detail__container">
         <span>Characters</span>
         <ul class="list-reset flex flex-wrap">
           <li *ngFor="let name of (characters$ | async); let i=index"
@@ -45,7 +46,8 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
           </li>
         </ul>
       </div>
-      <div class="c-detail__container">
+      <div *ngIf="(planets$ | async)?.length > 0"
+           class="c-detail__container">
         <p>Planets</p>
         <ul class="list-reset flex flex-wrap">
           <li *ngFor="let name of (planets$ | async); let i=index"
@@ -55,7 +57,8 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
           </li>
         </ul>
       </div>
-      <div class="c-detail__container">
+      <div *ngIf="(species$ | async)?.length > 0"
+           class="c-detail__container">
         <p>Species</p>
         <ul class="list-reset flex flex-wrap">
           <li *ngFor="let name of (species$ | async); let i=index"
@@ -65,7 +68,8 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
           </li>
         </ul>
       </div>
-      <div class="c-detail__container">
+      <div *ngIf="(starships$ | async)?.length > 0"
+           class="c-detail__container">
         <p>Spaceships</p>
         <ul class="list-reset flex flex-wrap">
           <li *ngFor="let name of (starships$ | async); let i=index"
@@ -75,7 +79,8 @@ import { fadeEnterLeave } from '../../../shared/animations/fade.animation';
           </li>
         </ul>
       </div>
-      <div class="c-detail__container">
+      <div *ngIf="(vehicles$ | async)?.length > 0"
+           class="c-detail__container">
         <span>Vehicles</span>
         <ul class="list-reset flex flex-wrap">
           <li *ngFor="let name of (vehicles$ | async); let i=index"
